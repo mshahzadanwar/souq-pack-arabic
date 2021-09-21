@@ -1,0 +1,18 @@
+.product_img img{
+    width: 100%;
+}
+.cust_icon{
+    background-color: #f9ca03;
+    color: #fff;
+    border-color: #f9ca03;
+    font-size: 18px;
+    margin-right: 10px;
+    height: 45px;
+    padding-left: 20px;
+    padding-right: 20px;
+    float: left;
+    text-align: center;
+    line-height: 45px;
+    border: 1px solid #CED4DA;
+    border-radius: 4px;
+}

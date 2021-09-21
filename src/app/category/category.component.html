@@ -1,0 +1,133 @@
+<!-- START MAIN CONTENT -->
+<div class="main_content">
+    <!-- *ngIf="catgory.cust==1" -->
+<!-- START SECTION SHOP -->
+<div class="section">
+	<div class="container">
+    	<div class="row">
+			<div class="col-lg-12">
+            	<div  class="row align-items-center mb-4 pb-1">
+                    <div class="col-12">
+                        <div class="product_header">
+                            <div class="product_header_left" *ngIf="prods.length>0">
+                                <div class="custom_select">
+                                    <select (change)="sort_by($event)" class="form-control form-control-sm">
+                                        <option  *ngIf="selectedLang!=1"  value="order">Default sorting</option>
+                                        <option  *ngIf="selectedLang==1"  value="order">الفرز الافتراضي</option>
+                                        <option *ngIf="selectedLang!=1" value="date">Sort by newness</option>
+                                        <option *ngIf="selectedLang==1" value="date">فرز حسب الحداثة</option>
+                                        <option *ngIf="selectedLang!=1" value="price">Sort by price: low to high</option>
+                                        <option *ngIf="selectedLang==1" value="price">فرز حسب السعر: من الأقل إلى الأعلى</option>
+                                        <option *ngIf="selectedLang!=1" value="price-desc">Sort by price: high to low</option>
+                                        <option *ngIf="selectedLang==1" value="price-desc">فرز حسب السعر: من الأعلى إلى الأقل</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="product_header_right">
+                            	<div class="products_view">
+                                    <a  class="shorting_icon grid active" ><i class="ti-view-grid"></i></a>
+                                    <a  class="shorting_icon list "><i class="ti-layout-list-thumb"></i></a>
+                                    <a *ngIf="catgory.cust==1 && selectedLang !=1" routerLink="/customizer/{{slug}}" class="cust_icon"><i class="fa fa-edit"></i> Customize Product</a>
+                                    <a *ngIf="catgory.cust==1 && selectedLang ==1" routerLink="/customizer/{{slug}}" class="cust_icon"><i class="fa fa-edit"></i> اصنع طلبك</a>
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                
+                <div *ngIf="show_products_div" class="row shop_container grid">
+                    <div *ngFor="let prod of prods; let ind=index;" class="col-md-3 col-4">
+                        <div  class="product">
+                            <a routerLink="/product/{{prod.slug}}">
+                            <div class="product_img">
+                               
+                                    <img src="{{php_url+'resources/uploads/products/'+prod.image}}" alt="product_img1">
+                                
+                                <!-- <div class="product_action_box">
+                                    <ul class="list_none pr_action_btn">
+                                        <li *ngIf="selectedLang!=1" class="add-to-cart"><a  (click)="addToCart(prod)"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
+                                        <li *ngIf="selectedLang==1" class="add-to-cart"><a  (click)="addToCart(prod)"><i class="icon-basket-loaded"></i> أضف إلى السلة</a></li>
+                                        
+                                        <li><a  routerLink="/product/{{prod.slug}}" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
+                                        <li><a  (click)="wish_prods(prod,ind)"  [class.w_active]="prod.in_wish"><i class="icon-heart"></i></a></li>
+                                    </ul>
+                                </div> -->
+                            </div>
+                        </a>
+                            <div class="product_info minht110 pb-0">
+                                <h6 class="product_title"><a routerLink="/product/{{prod.slug}}">{{prod.title}}</a></h6>
+                                <div *ngIf="prod.discount_text!=''" class="product_price">
+                                    <span class="price">{{prod.discounted_text}}</span>
+                                    <del>{{prod.real_price_text}}</del>
+                                   
+                                    <div class="on_sale" *ngIf="selectedLang!=1">
+                                        <span>{{prod.discount_text}} Off</span>
+                                    </div>
+                                    <div class="on_sale" *ngIf="selectedLang==1" style="direction: ltr;">
+                                        <span> {{prod.discount_text}} خصم</span>
+                                    </div>
+                                </div>
+                                <div *ngIf="prod.discount_text==''" class="product_price">
+                                    <span class="price">{{prod.real_price_text}}</span>
+                                    
+                                </div>
+                                <!-- <div class="rating_wrap">
+                                    <div class="rating">
+                                        <div class="product_rate" style="width:80%"></div>
+                                    </div>
+                                    <span class="rating_num">(21)</span>
+                                </div> -->
+                                <div class="pr_desc">
+                                    <p>{{prod.description}}</p>
+                                </div>
+                                <!-- <div class="pr_switch_wrap">
+                                    <div class="product_color_switch">
+                                        <span class="active" data-color="#87554B"></span>
+                                        <span data-color="#333333"></span>
+                                        <span data-color="#DA323F"></span>
+                                    </div>
+                                </div> -->
+                                <!-- <div class="list_product_action_box">
+                                    <ul class="list_none pr_action_btn">
+                                        <li *ngIf="selectedLang!=1"  class="add-to-cart"><a  (click)="addToCart(prod)"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
+                                        <li *ngIf="selectedLang==1"  class="add-to-cart"><a  (click)="addToCart(prod)"><i class="icon-basket-loaded"></i> أضف إلى السلة</a></li>
+                                        
+                                        <li><a  routerLink="/product/{{prod.slug}}" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
+                                        <li><a (click)="wish_tab(prod,prod_ind,tab_i)"  [class.w_active]="prod.in_wish"><i class="icon-heart"></i></a></li>
+                                    </ul>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+        		<div class="row easy" *ngIf="f_pages.length>1">
+                    <div class="col-12" >
+                        <ul class="pagination mt-3 justify-content-center pagination_style1">
+                            <li *ngFor="let pagge of f_pages; let ind=index;" class="page-item " [class.active]="pagge==(page+1)" ><a class="page-link" (click)="doPage(pagge)">{{pagge}}</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div *ngIf="!show_products_div" class="row">
+                    <div class="col-12 text-center">
+                        <span *ngIf="selectedLang!=1" class="easy text-center">Loading Products...</span>
+                        <span *ngIf="selectedLang==1" class="easy text-center">تحميل المنتجات ...</span>
+                    </div>
+                </div>
+			
+            <div *ngIf="show_products_div && prods.length==0" class="row">
+                    <div class="col-12 text-center">
+                        <span *ngIf="selectedLang!=1" class="easy text-center">No Products Found</span>
+                        <span *ngIf="selectedLang==1" class="easy text-center">لا توجد منتجات</span>
+                    </div>
+                </div>
+			</div>
+            
+        </div>
+    </div>
+</div>
+<!-- END SECTION SHOP -->
+
+</div>
+<!-- END MAIN CONTENT -->

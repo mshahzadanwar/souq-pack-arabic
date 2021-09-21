@@ -1,0 +1,53 @@
+<!-- START MAIN CONTENT -->
+<div *ngIf="dataLoaded" class="main_content">
+    <!-- START SECTION WHY CHOOSE --> 
+    <div class="section pb_70">
+        <div class="container">
+            <div class="row justify-content-center">
+                    <div class="heading_s1 text-center">
+                        <h2>{{title}}</h2>
+                    </div>
+                    <div class="easy" >
+                        <div class="col-md-12 col-lg-12 col-sm-12 nopad" [innerHTML]="sanitizer.bypassSecurityTrustHtml(content)"></div>
+                    </div>
+            </div>
+            
+        </div>
+    </div>
+    <!-- END SECTION WHY CHOOSE --> 
+    
+    </div>
+    <!-- END MAIN CONTENT -->
+    
+    
+    <!-- FAQ DATA LOADED -->
+    <div *ngIf="faqdataLoaded" class="main_content">
+            <!-- START SECTION WHY CHOOSE --> 
+            <div class="section pb_70">
+                <div class="container">
+                    <div class="row justify-content-center">
+                            <div class="heading_s1 text-center">
+                                <h2 *ngIf="selectedLang!=1">Frequently Asked Questions</h2>
+                                <h2 *ngIf="selectedLang==1">أسئلة متكررة</h2>
+                            </div>
+                           
+                    </div>
+                    <div id="accordion" class="accordion accordion_style1">
+                            <div class="card" *ngFor="let val of faq; let ind=index;">
+                                <div class="card-header" id="heading{{ind}}">
+                                    <h6 class="mb-0"> <a class="collapsed" data-toggle="collapse" href="#collapse{{ind}}" aria-expanded="false" aria-controls="collapseOne">{{val.title}}</a> </h6>
+                                    </div>
+                                    <div id="collapse{{ind}}" class="collapse" aria-labelledby="heading{{ind}}" data-parent="#accordion">
+                                    <div class="card-body" [innerHTML]="sanitizer.bypassSecurityTrustHtml(val.content)">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                    
+                            </div>
+             </div>
+            </div>
+            <!-- END SECTION WHY CHOOSE --> 
+            
+            </div>
+            <!-- END MAIN CONTENT -->

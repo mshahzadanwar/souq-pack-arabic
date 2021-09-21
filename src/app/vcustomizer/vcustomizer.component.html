@@ -1,0 +1,535 @@
+<div *ngIf="!ready" class="loading_cust">Loading...</div>
+<div *ngIf="ready" class="cust_main">
+    <div class="cust_header">
+        <div class="cust_header_left"></div>
+        <div class="cust_header_center"  *ngIf="selectedLang!=1">
+            <i class="fas fa-boxes"></i> View Your Order
+        </div>
+        <div class="cust_header_center"  *ngIf="selectedLang==1">
+            <i class="fas fa-boxes" style="margin-left: 10px;"></i> تفاصيل وحالة الطلب 
+        </div>
+        <div class="cust_header_right">
+            
+        </div>
+    </div>
+
+    <div class="d-flex align-items-center justify-content-center">
+        <div class="cust_cont d-flex justify-space onmobile_mb_safe_cloumn">
+            <div class="seventy">
+                    <div class="cust_control_box" style="height: 155px;" *ngIf="show_new_comment">
+                            <div class="cust_c_b_title_cont">
+                                <div class="cust_c_b_title_i_no_bg">
+                                    <i class="fa fa-plus"></i>
+                                </div>
+                                <div class="cust_c_b_title" style="width: 100%;">
+                                    <span style="font-weight: bold;" *ngIf="selectedLang!=1">Send Message </span>
+                                    <span style="font-weight: bold;" *ngIf="selectedLang==1">أرسل رسالة</span>
+                                    <div class="close_comment" *ngIf="selectedLang!=1">
+                                        <i class="fa fa-times" (click)="hide_box_comment()"></i>
+                                    </div>
+                                    <div class="close_comment_ar" *ngIf="selectedLang==1">
+                                        <i class="fa fa-times" (click)="hide_box_comment()"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cust_c_b_main">
+                                <div class="m-t-10">
+                                <div class="cust_c_b_main" *ngIf="selectedLang!=1">
+                                    <textarea 
+                                    [(ngModel)]="comment.notes"
+                                    rows="3"
+                                    class="notes_text_area"
+                                    placeholder="Write a message you want to sent to souqpack"
+                                    ></textarea>
+                                </div>
+                                <div class="cust_c_b_main" *ngIf="selectedLang==1">
+                                        <textarea 
+                                        [(ngModel)]="comment.notes"
+                                        rows="3"
+                                        class="notes_text_area"
+                                        placeholder="اكتب رسالة تريد إرسالها إلى souqpack"
+                                        ></textarea>
+                                    </div>
+                                </div>
+                                <div class="notes_text_area">
+                                    <button type="submit" (click)="postComment()" class="btn btn-primary btn-sm" style="float:right;">Send Your Comments</button>
+                                </div>
+                            </div>
+                    </div>
+                <div class="cust_control_box">
+                    <div class="cust_c_b_title_cont">
+                        <div class="cust_c_b_title_i_no_bg">
+                            <i class="fa fa-tv"></i>
+                        </div>
+                        <div class="cust_c_b_title" style="width: 100%;">
+                            <span style="font-weight: bold;" *ngIf="selectedLang!=1">Order History</span>
+                            <span style="font-weight: bold;" *ngIf="selectedLang==1">حالة الطلب</span>
+
+                            <span style="float: right" *ngIf="selectedLang !=1">
+                                <button type="button" (click)="show_box_comment()" class="btn-sm btn btn-success" style="    background: #f9cb00;
+                                border: 1px;">Post Comment</button>
+                            </span>
+                            <span style="float: left;" *ngIf="selectedLang ==1">
+                                <button type="button" (click)="show_box_comment()" class="btn-sm btn btn-success" style="    background: #f9cb00;
+                                border: 1px;">أرسل رسالة</button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="cust_c_b_main">
+                            <div class="col-md-12 m-t-40" *ngIf="oobj.status==3 && allowedAcceptAction">
+                                    <div class="action_btns" style="margin-left: 47px;">
+                                        <button (click)="reallyAccept()" type="button" class="accept_btn" style="border: 1px solid #f9ca03;
+                                        border-radius: 2px;">
+                                            <span *ngIf="selectedLang!=1">Accept Delivery</span>
+                                            <span *ngIf="selectedLang==1">قبول التسليم</span>
+                                        </button>
+                                        <button (click)="rejectDelivery()" type="button" class="accept_btn rejecting" style="border: 1px solid #ff0000;
+                                        border-radius: 2px;">
+                                            
+                                            <span *ngIf="selectedLang!=1">Reject Delivery</span>
+                                            <span *ngIf="selectedLang==1">رفض التسليم</span>
+        
+                                        </button>
+                                    </div>
+                                </div>
+                        <div class="m-t-40">
+                            <div class="threads">
+                                <div class="thread" *ngFor="let thread of threads" >
+                                    <div class="thread_title"><b class="by_thread">{{thread.by}}:</b> <div class="thread_time">{{thread.created_at}}</div></div>
+                                    <div class="thread_title thread_title_v2" *ngIf="selectedLang !=1">{{thread.title}}</div>
+
+                                    <div class="thread_title thread_title_v2" *ngIf="selectedLang == 1 && thread.title_ar != ''">{{thread.title_ar}}</div>
+                                    <div class="thread_title thread_title_v2" *ngIf="selectedLang == 1 && thread.title_ar == ''">{{thread.title}}</div>
+                                    
+                                    <div class="thread_body" *ngIf="selectedLang != 1  && thread.cdesc==null" [innerHTML]="thread.desc"></div>
+                                    <div class="thread_body" *ngIf="selectedLang != 1" [innerHTML]="thread.cdesc"></div>
+                                    <!-- {{thread.cdesc}} {{thread.desc}} -->
+                                    <div class="thread_body" *ngIf="selectedLang == 1  && thread.desc_ar==null" [innerHTML]="thread.desc"></div>
+                                    <div class="thread_body" *ngIf="selectedLang == 1 && thread.desc_ar !=''" [innerHTML]="thread.desc_ar"></div>
+
+
+                                    <div class="thread_file_view" *ngIf="thread.file!='' && thread.file!=null">
+                                        <div class="image_view_thread" *ngIf="thread.is_image==1">
+                                            <img src="{{php_url+'resources/uploads/orders/'+thread.file}}" style="width: 100px;" />
+                                        </div>
+                                        <div class="" style="margin-top: 8px;">
+                                            <a href="{{php_url+'api/download/'+thread.id}}">
+                                                <div class="download_view">Download {{thread.filename}} ({{thread.file_size}}KB) <i class="fas fa-download"></i></div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="" *ngIf="thread.by_bank == 1">
+                                    <div class="thread_file_view" *ngIf="thread.attach_bank!='' && thread.attach_bank!=null">
+                                            <div class="image_view_thread" *ngIf="thread.by_bank==1">
+                                                <img src="{{php_url+'resources/uploads/orders/'+thread.attach_bank}}" style="width: 100px;" />
+                                            </div>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="m-t-40" *ngIf="rejecting">
+                            <div class="easy">
+                                <textarea 
+                                [(ngModel)]="rejectModal.reason"
+                                name="reason"
+                                rows="5"
+                                class="notes_text_area"
+                                placeholder="Please type your comments to reject this delivery"
+                                ></textarea>
+                            </div>
+                            <div class="m-t-40 easy">
+                                <div class="">
+                                    <button type="button" (click)="reallyReject()" class="accept_btn rejecting">
+                                        <span *ngIf="selectedLang!=1">Reject Now</span>
+                                        <span *ngIf="selectedLang==1">ارفض الآن</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="thirty">
+
+
+                <div class="cust_control_box">
+                    <div class="cust_c_b_title_cont">
+                        <div class="cust_c_b_title_i">
+                            <i class="fa fa-check"></i>
+                        </div>
+                        <div class="cust_c_b_title" *ngIf="selectedLang!=1">
+                            <span style="font-weight: bold;"> {{oobj.c_title}}</span>
+                        </div>
+                        <div class="cust_c_b_title" *ngIf="selectedLang==1">
+                            <span style="font-weight: bold;"> {{oobj.c_title_ar}}</span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="cust_control_box m-t-40">
+                    <div class="cust_c_b_title_cont">
+                        <div class="cust_c_b_title_i_no_bg">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div class="cust_c_b_title">
+                            <span style="font-weight: bold;" *ngIf="selectedLang!=1">Order Details</span>
+                            <span style="font-weight: bold;" *ngIf="selectedLang==1">تفاصيل الطلب</span>
+                        </div>
+                    </div>
+                    <div class="cust_c_b_main pdl-13p">
+                        <div class="price_row m-t-40">
+                            <span class="price_title" *ngIf="selectedLang!=1">Quantity </span>
+                            <span class="price_title" *ngIf="selectedLang==1">الكمية </span>
+                            <span class="price_value">{{oobj.qty}}</span>
+                        </div>
+                        <div class="price_row">
+                            <span class="price_title" *ngIf="selectedLang!=1">Size </span>
+                            <span class="price_title" *ngIf="selectedLang==1">الحجم </span>
+                            <span class="price_value">{{oobj.whg}}</span>
+                        </div>
+                        <div class="price_row">
+                            <span class="price_title" *ngIf="selectedLang!=1">Prints </span>
+                            <span class="price_title" *ngIf="selectedLang==1">أوجه الطباعة </span>
+                            <span class="price_value">{{oobj.print_face_title}}</span>
+                        </div>
+
+                        <div class="price_row">
+                            <span class="price_title" *ngIf="selectedLang!=1">Delivery Date </span>
+                            <span class="price_title" *ngIf="selectedLang==1">تاريخ التسليم او الوصول </span>
+                            <span class="price_value">{{oobj.deliver_date}}</span>
+                        </div>
+                        
+                        <div class="price_row" *ngFor="let option of oobj.options; let i=index;">
+                            <span class="price_title">{{option.title}} </span>
+                            <span class="price_value">{{option.value}}</span>
+                        </div>
+                        <div *ngIf="oobj.logo_type!=0">
+                            <div class="price_row">
+                                <span class="price_title" *ngIf="selectedLang!=1">Logo Type </span>
+                                <span class="price_title" *ngIf="selectedLang==1">نوع الشعار </span>
+                                <span class="price_value"  *ngIf="selectedLang!=1">{{oobj.logo_type==1?'Uploaded':'Create New'}}</span>
+                                <span class="price_value"  *ngIf="selectedLang==1">{{oobj.logo_type==1?'تم الرفع':'خلق جديد إبداع جديد'}}</span>
+                            </div>
+
+                            <div class="price_row" *ngIf="oobj.logo_type==2">
+                                <span class="price_title" *ngIf="selectedLang!=1">Logo Title </span>
+                                <span class="price_title" *ngIf="selectedLang==1">عنوان الشعار </span>
+                                <span class="price_value">{{oobj.logo_name}}</span>
+                            </div>
+
+                            <div class="price_row" *ngIf="oobj.logo_type==2">
+                                <span class="price_title" *ngIf="selectedLang!=1">Logo Description </span>
+                                <span class="price_title" *ngIf="selectedLang==1">وصف الشعار </span>
+                                <span class="price_value">{{oobj.logo_desc}}</span>
+                            </div>
+
+                            <div class="price_row" *ngIf="oobj.logo_type==1">
+                                <span class="price_title" *ngIf="selectedLang!=1">Logo Image </span>
+                                <span class="price_title" *ngIf="selectedLang==1">صورة الشعار </span>
+                                <span class="price_value">
+                                    <a href="{{oobj.file_url}}" target="_blank">
+                                        <img [src]="oobj.file_src" style="height: 40px;" />
+                                    </a>
+                                </span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="price_row">
+                            <span class="price_title" *ngIf="selectedLang!=1">Color Type </span>
+                            <span class="price_title" *ngIf="selectedLang==1">اللون </span>
+                            <span class="price_value">{{oobj.color_type==1?'HEX':'CMYK'}}</span>
+                        </div>
+
+                        <div class="price_row">
+                            <span class="price_title" *ngIf="selectedLang!=1">Color Preview </span>
+                            <span class="price_title" *ngIf="selectedLang==1">معاينة / كود اللون </span>
+                            <span class="price_value color_preivew"><div  [style.background]="oobj.color"></div></span>
+                        </div>
+
+                        
+
+                        <div class="price_row" *ngIf="oobj.logo_type==2">
+                            <span class="price_title" *ngIf="selectedLang!=1">Color </span>
+                            <span class="price_title" *ngIf="selectedLang==1">اللون </span>
+                            <span class="price_value" *ngIf="color_type==1">{{oobj.color}} </span>
+                            <span class="price_value" *ngIf="color_type==2">C: {{oobj.color_c}} M: {{oobj.color_m}} Y: {{oobj.color_y}} K: {{oobj.color_k}}</span>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="cust_control_box m-t-40">
+                    <div class="cust_c_b_title_cont">
+                        <div class="cust_c_b_title_i_no_bg">
+                            <i class="fas fa-money-check-alt"></i>
+                        </div>
+                        <div class="cust_c_b_title">
+                            <span style="font-weight: bold;" *ngIf="selectedLang!=1">Payment History</span>
+                            <span style="font-weight: bold;" *ngIf="selectedLang==1">حالة الدفع</span>
+                        </div>
+                    </div>
+                    <div class="cust_c_b_main pdl-13p">
+                        <div class="price_row m-t-40">
+                            <span class="price_title" *ngIf="selectedLang!=1">Price </span>
+                            <span class="price_title" *ngIf="selectedLang==1">السعر </span>
+                            <span class="price_value">{{oobj.price_text}}</span>
+                        </div>
+                        <div class="price_row">
+                            <span class="price_title" *ngIf="selectedLang!=1">Logo Cost </span>
+                            <span class="price_title" *ngIf="selectedLang==1">تكلفة التصميم </span>
+                            <span class="price_value">{{oobj.logo_cost}}</span>
+                        </div>
+                        <!-- <div class="price_row">
+                            <span class="price_title" *ngIf="selectedLang!=1">Total Stamps </span>
+                            <span class="price_title" *ngIf="selectedLang==1">مجموع الطوابع </span>
+                            <span class="price_value">{{oobj.stamps_price_text}}</span>
+                        </div> -->
+                        <div class="price_row">
+                            <span class="price_title" *ngIf="selectedLang!=1">Shipping </span>
+                            <span class="price_title" *ngIf="selectedLang==1">الشحن </span>
+                            <span class="price_value">{{oobj.shipping_text}}</span>
+                        </div>
+
+                        <!-- <div class="price_row">
+                            <span class="price_title" *ngIf="selectedLang!=1">VAT </span>
+                            <span class="price_title" *ngIf="selectedLang==1">القيمة المضافة </span>
+                            <span class="price_value">{{oobj.vat_text}}</span>
+                        </div> -->
+
+                        <div class="price_row">
+                            <span class="price_title" *ngIf="selectedLang!=1">Down Payment </span>
+                            <span class="price_title" *ngIf="selectedLang==1">الدفعة الأولى </span>
+                            <span class="price_value">{{oobj.down_text}}</span>
+                        </div>
+
+                        <div class="price_total_hr" ></div>
+                        <div class="price_row">
+                            <span class="price_title" *ngIf="selectedLang!=1">Total </span>
+                            <span class="price_title" *ngIf="selectedLang==1">المجموع </span>
+                            <span class="price_value">{{oobj.all_total_text}}</span>
+                        </div>
+
+                        <div class="price_row m-t-40">
+                            <span class="price_title paid_row" *ngIf="selectedLang!=1">Paid </span>
+                            <span class="price_title paid_row" *ngIf="selectedLang==1">المدفوع </span>
+                            <span class="price_value">{{oobj.total_arrived_text}}</span>
+                        </div>
+                        <div class="price_row pending_row">
+                            <span class="price_title" *ngIf="selectedLang!=1">Pending </span>
+                            <span class="price_title" *ngIf="selectedLang==1">المتبقي </span>
+                            <span class="price_value">{{oobj.total_pending_text}}</span>
+                        </div>
+
+
+                        <div class="tota_input_cont tota_input_cont_less" *ngIf="oobj.show_payment==1">
+                            <button type="button" class="buy_now_button" (click)="buyNow()"  *ngIf="selectedLang!=1">PAY NOW</button>
+                            <button type="button" class="buy_now_button" (click)="buyNow()"  *ngIf="selectedLang==1">ادفع الآن</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cust_control_box m-t-40" *ngIf="oobj.notes!=null && oobj.notes!=''">
+                    <div class="cust_c_b_title_cont">
+                        <div class="cust_c_b_title_i_no_bg">
+                            <i class="far fa-sticky-note"></i>
+                        </div>
+                        <div class="cust_c_b_title">
+                            <span style="font-weight: bold;"  *ngIf="selectedLang!=1">Notes</span>
+                            <span style="font-weight: bold;"  *ngIf="selectedLang==1">ملاحظات</span>
+                        </div>
+                    </div>
+                    <div class="cust_c_b_main pdl-13p">
+                        <div class="price_row m-t-40">
+                            {{oobj.notes}}
+                        </div>
+                       
+                    </div>
+                </div>
+
+            </div>
+
+
+            
+        </div>
+    </div>
+    
+   
+</div>
+<div *ngIf="payment_popup" class="payment_popup_container">
+    <div class="payment_popup_self">
+        <div class="payment_popup_header">
+            <div class="payment_popup_header_left"></div>
+            <div class="payment_popup_header_center"  *ngIf="selectedLang!=1">
+                Payment
+            </div>
+            <div class="payment_popup_header_center"  *ngIf="selectedLang==1">
+                الدفع
+            </div>
+            <div class="payment_popup_header_right"  (click)="cancelPayment()">
+                <i class="fa fa-times"></i>
+            </div>
+        </div>
+        <div class="payment_popup_body">
+            <div class="payment_buttons_holder">
+                <!-- <div class="payment_button_1 " (click)="paymentMethod(1)" *ngIf="paypal_allowed==1" [class.payment_button_selected]="payment_method==1">
+                    <img src="./../../assets/images/paypal2.png" />
+                    Pay with PayPal
+                </div> -->
+                <div class="payment_button_1 " style="margin-right: 20px;" (click)="paymentMethod(4)" [class.payment_button_selected]="payment_method==4">
+                    <img src="./../../assets/images/bank.png" />
+                    Bank Transfer
+                </div>
+
+                
+                <!-- <div class="payment_button_2" (click)="paymentMethod(3)" [class.payment_button_selected]="payment_method==3">
+                    <img src="./../../assets/images/payfort.png" />
+                    Pay With (Credit Card - Mada Card)
+                </div> -->
+
+                <div class="payment_button_2" (click)="paymentMethod(3)" [class.payment_button_selected]="payment_method==3">
+                    <img src="./../../assets/images/payfort.png" />
+                    (Credit Card - Mada Card)
+                </div>
+            </div>
+            <div class="" *ngIf="show_bank_details">
+                    <table class="table_bank" style="width: 95%;
+                    margin: 12px;
+                    float: left;
+                    clear: both;    text-align: center;">
+                        <tr>
+                            <td colspan="2">{{bank.company}}</td>
+                        </tr>
+                        </table>
+                <table class="table_bank" [class.width100]="bank.bank_name_2==null || bank.bank_name_3==null">
+                    <tr>
+                        <th colspan="2" style="text-align: center;">Bank Account 1</th>
+                    </tr>
+                    <tr>
+                        <th>Bank Name</th>
+                        <td>{{bank.name_bank}}</td>
+                    </tr>
+                    <tr>
+                        <th>IBAN Number</th>
+                        <td>{{bank.iban}}</td>
+                    </tr>
+                    
+                </table>
+
+                <table class="table_bank" *ngIf="bank.bank_name_2!=''">
+                        <tr>
+                                <th colspan="2" style="text-align: center;">Bank Account 2</th>
+                            </tr>
+                    <tr>
+                        <th>Bank Name</th>
+                        <td>{{bank.bank_name_2}}</td>
+                    </tr>
+                    <tr>
+                        <th>IBAN Number</th>
+                        <td>{{bank.iban_2}}</td>
+                    </tr>
+                    
+                </table>
+                <table class="table_bank" *ngIf="bank.bank_name_3!=''">
+                        <tr>
+                                <th colspan="2" style="text-align: center;">Bank Account 3</th>
+                            </tr>
+                    <tr>
+                        <th>Bank Name</th>
+                        <td>{{bank.bank_name_3}}</td>
+                    </tr>
+                    <tr>
+                        <th>IBAN Number</th>
+                        <td>{{bank.iban_3}}</td>
+                    </tr>
+                    
+                </table>
+            </div>
+            <div class="bank_details" *ngIf="show_bank_details">
+                
+                <div class="" style="margin-top: 5px;">
+                    <button type="button"  (click)="!uploading?fileUploader.click():doNothing()" class="buy_now_button">Transfer completed – Upload Receipt</button>
+                </div>
+
+                <div class="upload_box" *ngIf="upload_box" style="    width: 49%;
+                margin-top: 10px;
+                border: 1px solid #ccc;
+                padding: 10px;
+                border-radius: 5px;">
+                        <div class="file_tx" style="margin-bottom: 10px; font-size: 11px;
+                        text-align: center;"> 
+                            Upload The Receipt <small>Supported Format : (png,jpg,jpeg)</small>
+                        </div>
+                        <!-- <div class="logo_file c_pointer">
+                            <span *ngIf="selectedLang!=1">
+                                <div class="logo_file_text" *ngIf="!uploading">Upload Logo File</div>
+                                <div class="logo_file_text" *ngIf="uploading">Uploading...</div>
+                            </span>
+                            <span *ngIf="selectedLang==1">
+                                <div class="logo_file_text" *ngIf="!uploading">تحميل ملف الشعار</div>
+                                <div class="logo_file_text" *ngIf="uploading">تحميل ...</div>
+                            </span>
+                            <div class="logo_file_icon">
+                                <i class="fa fa-upload"></i>
+                            </div>
+                        </div> -->
+                        <div class="cust_c_b_hr_right">
+                            <div class="file_preview" *ngIf="file_preview_src!=''">
+                                <img [src]="file_preview_src" />
+                                <button type="button" class="remove_image" (click)="this.upload_box=false;
+                                this.ButtonTEXT='';file_preview_src='';this.final_form.logo.logo_file.file_name=''">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="payment_popup_footer">
+            <button type="button" (click)="cancelPayment()" class="pay_button_yellow bg_transparent">Cancel</button>
+            <button type="button" #payButton (click)="payment_method==3?submitPayfort.click():submitBank()" class="pay_button_yellow">{{ButtonTEXT || "Pay Now"}}</button>
+        </div>
+    </div>
+
+    <form
+    style="height: 0;width: 0;opacity: 0;"
+    ngNoForm method="POST" action="https://sbcheckout.payfort.com/FortAPI/paymentPage">
+        <input type="hidden" name="access_code" value="PPDq3t8RTynTM0dfWURk" />
+        <input type="hidden" name="amount" value="{{payfort.vals.amount}}" />
+        <input type="hidden" name="command" value="PURCHASE" />
+        <input type="hidden" name="currency" value="{{payfort.vals.currency}}" />
+        <input type="hidden" name="customer_email" value="{{my_email}}" />
+        <input type="hidden" name="language" value="en" />
+
+        <input type="hidden" name="merchant_identifier" value="oGfFqhGJ" />
+        <input type="hidden" name="merchant_reference" value="{{payfort.vals.merchant_reference}}" />
+        <input type="hidden" name="return_url" value="{{payfort.vals.return_url}}">
+        <input type="hidden" name="signature" value="{{payfort.signature}}" />
+
+        <div class="easy" style="text-align:center">
+
+
+            <button
+                #submitPayfort
+          type="submit" class="btn btn-fill-out btn-block"
+                 id="submit">Pay With (Credit Card - Mada Card)</button>
+              
+        </div>
+    </form>
+</div>
+
+<input type="file"
+        #fileUploader
+        id="file"
+        
+        style="opacity: 0;height: 0;width: 0;"
+        (change)="handleFileInput($event.target.files)"
+    >

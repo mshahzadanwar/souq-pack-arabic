@@ -1,0 +1,479 @@
+<!-- START SECTION BANNER -->
+<div class="staggered-animation-wrap">
+	<div class="custom-container d-flex justify-content-center bg-ff ">
+    	<div class="row width83p pt-0 pb-0">
+        	<div class="col-lg-8 ">
+            	<div class="banner_section shop_el_slider">
+                    <div *ngIf="sliders.length==0" style="background: #e9eef1; width: 100%; height: 265px; padding-bottom: 10px;">
+                    
+                    </div>
+                    <div *ngIf="sliders.length>0" id="carouselExampleControls" class="carousel slide carousel-fade light_arrow" data-ride="carousel" data-touch="true">
+                        <div class="carousel-inner">
+                           
+                            <div *ngFor="let slider of sliders; let i=index;" class="carousel-item  background_bg no_repeat_bg" [class.active]="i==0" >
+                                <div class="banner_slide_content banner_content_inner">
+                                    <a routerLink="/category/{{slider.link_to}}" style="display: block;">
+                                        <img [src]="slider.path" style="width: 100%;"/>
+                    
+                                        <div *ngIf="slider.link_to && selectedLang!=1" class="buy_now_ar">Order Now</div>
+
+                                        <div *ngIf="slider.link_to && selectedLang==1" class="buy_now">اطلب الأن</div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <ol class="carousel-indicators indicators_style3">
+                            <li *ngFor="let slider of sliders; let i=index;" data-target="#carouselExampleControls" [attr.data-slide-to]="i" [class.active]="i==0"></li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        	<div class="col-lg-4 ">
+                <div *ngIf="two_offers.length==0" style="background: #e9eef1; width: 100%; height: 127px; margin-bottom: 10px;">
+                </div>
+                <div *ngIf="two_offers.length==0" style="background: #e9eef1; width: 100%; height: 127px; margin-bottom: 25px;">
+                    </div>
+                <div  *ngFor="let offer of two_offers" >
+                    <div class="sale-banner mb-3">
+                        <a class="hover_effect1 home_offer_a" routerLink="/offer/{{offer.slug}}">
+                            <img [attr.src]="php_url + 'resources/uploads/offers/'+offer.image" alt="shop_banner_img7">
+                        
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+            
+        </div>
+    </div>
+</div>
+<!-- END SECTION BANNER -->
+
+<!-- END MAIN CONTENT -->
+<div class="main_content">
+
+<!-- START SECTION SHOP -->
+<div class="section small_pt pb-0">
+	<div class="custom-container d-flex justify-content-center ">
+    	<div class="row width83p">
+        	<!-- <div class="col-xl-3 d-none d-xl-block">
+            	<div class="sale-banner">
+                	<a class="hover_effect1" href="#">
+                		<img src="../../assets/images/shop_banner_img6.jpg" alt="shop_banner_img6">
+                    </a>
+                </div>
+            </div> -->
+        	<div class="col-xl-12">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="heading_tab_header">
+                            <div class="heading_s2">
+                                <h4 *ngIf="selectedLang!=1">Exclusive Products</h4>
+                                <h4 *ngIf="selectedLang==1">منتجات حصرية</h4>
+                            </div>
+                            <div class="tab-style2">
+                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#tabmenubar1" aria-expanded="false"> 
+                                    <span class="ion-android-menu"></span>
+                                </button>
+                                <ul class="nav nav-tabs justify-content-center justify-content-md-end" id="tabmenubar1" role="tablist">
+                                    <li *ngFor="let tab of tabs; let tab_i=index;" class="nav-item yellow_capsuls">
+                                        <a class="nav-link " [class.active]="tab_i==0"  [attr.id]="'arivel_'+tab_i+'_pp-tab'" [attr.href]="'#arivel_'+tab_i+'_pp'" [attr.aria-controls]="'arivel_'+tab_i+'_pp'" data-toggle="tab" role="tab" [attr.aria-selected]="tab_i==0">
+                                            <span >{{tab.title}}</span>
+                                        </a>
+                                    </li>
+                                  
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div  class="row" *ngIf="tabs.length==0">
+                        <div  class="col-12">
+                            <div  class="tab_slider">
+                                <div  role="tabpanel" class="tab-pane fade show active" aria-labelledby="arivel_0_pp-tab" id="arivel_0_pp">
+                                    <div  data-loop="false" data-margin="20"
+                                        class="product_slider carousel_slider owl-carousel owl-theme dot_style1 owl-loaded owl-drag">
+                                      
+                                        <div class="owl-stage-outer">
+                                            <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 2170px;">
+                                                <div  *ngFor="let i of [].constructor(5)" class="owl-item active" style="width: 197px; margin-right: 20px;">
+                                                    <div  class="item">
+                                                        <div  class="product_wrap">
+                                                            <a>
+                                                                <div class="product_img" style="background: #e9eef1; width: 100%;">
+                                                                    
+                                                                </div>
+                                                            </a>
+                                                            <div  class="product_info minht110 pb-0">
+                                                                <h6  class="product_title" style="background: #e9eef1; width: 100%; height: 20px;">
+                                                                </h6>
+                                                              
+                                                                <div  class="product_price" style="background: #e9eef1; width: 100%; height: 20px;">
+                                                                    <span  class="price"></span>
+                                                                </div>
+                                                               
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                </div>
+                              
+                            </div>
+                        </div>
+                    </div>        
+                    </div>
+                    </div>
+                </div>
+
+                <!-- ////////////////////////////////////// -->
+                <div class="row" *ngIf="tabs.length!=0">
+                    <div class="col-12">
+                        <div class="tab_slider top_tabs">
+                            <div *ngFor="let tab of tabs; let tab_i = index;" class="tab-pane fade  "  [attr.aria-labelledby]="'arivel_'+tab_i+'_pp-tab'" [class.show]="tab_i==0" [class.active]="tab_i==0" [attr.id]="'arivel_'+tab_i+'_pp'" role="tabpanel">
+                                <div class="product_slider carousel_slider owl-carousel owl-theme dot_style1" data-loop="false" data-margin="0" data-responsive='{"0":{"items": "2"}, "481":{"items": "2"}, "768":{"items": "3"}, "991":{"items": "5"}}'>
+                                    <div *ngFor="let prod of tab.products; let prod_ind=index;" class="item ">
+                                        <div class="product_wrap">
+                                            <a routerLink="/product/{{prod.slug}}">
+
+                                            <div class="product_img">
+                                                    <img 
+                                                    [attr.data-src]="php_url+'resources/uploads/products/'+prod.image" [attr.src]="defaul_image"
+                                                    alt="el_img1" loading="lazy">
+                                                
+                                                
+                                            </div>
+                                        </a>
+
+                                            <div class="product_info minht110 pb-0" [class.infortl]="selectedLang==1">
+                                                    <h6 class="product_title"><a routerLink="/product/{{prod.slug}}">{{prod.title}}</a></h6>
+                                                <div *ngIf="prod.discount_text!=''" class="product_price">
+                                                    <span class="price">{{prod.discounted_text}}</span>
+                                                    <del>{{prod.real_price_text}}</del>
+                                                 
+                                                    <div class="on_sale" *ngIf="selectedLang!=1">
+                                                        <span>{{prod.discount_text}} Off</span>
+                                                    </div>
+                                                    <div class="on_sale" *ngIf="selectedLang==1"  style="direction: ltr;">
+                                                        <span>{{prod.discount_text}} خصم</span>
+                                                    </div>
+                                                </div>
+                                                <div *ngIf="prod.discount_text==''" class="product_price">
+                                                    <span class="price">{{prod.real_price_text}}</span>
+                                                    
+                                                </div>
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        	</div>
+        </div>
+    </div>
+</div>
+<!-- END SECTION SHOP -->
+
+
+
+
+<!-- START SECTION SHOP -->
+<div class="section small_pt pb-0">
+	<div class="custom-container d-flex justify-content-center ">
+            <div class="row width83p" *ngIf="tabsv2.length==0">
+                    <div class="col-xl-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="heading_tab_header">
+                                    <div class="heading_s2">
+                                        <h4>SouqPack Products</h4>
+                                    </div>
+                                    <div class="tab-style2">
+                                        <button type="button" data-toggle="collapse" data-target="#tabmenubar" aria-expanded="false" class="navbar-toggler">
+                                            <span class="ion-android-menu"></span>
+                                        </button>
+                                        <ul id="tabmenubar" role="tablist" class="nav nav-tabs justify-content-center justify-content-md-end">
+                                            <li class="nav-item yellow_capsuls">
+                                                <a data-toggle="tab" role="tab" class="nav-link active" id="arivel_100_pp-tab" href="#arivel_100_pp"
+                                                    aria-controls="arivel_100_pp" aria-selected="true">
+                                                    <span>Recommended</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item yellow_capsuls">
+                                                <a data-toggle="tab" role="tab" class="nav-link" id="arivel_101_pp-tab" href="#arivel_101_pp"
+                                                    aria-controls="arivel_101_pp" aria-selected="false">
+                                                    <span>Bags</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item yellow_capsuls">
+                                                <a data-toggle="tab" role="tab" class="nav-link" id="arivel_102_pp-tab" href="#arivel_102_pp"
+                                                    aria-controls="arivel_102_pp" aria-selected="false">
+                                                    <span>Plastic Containers</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item yellow_capsuls">
+                                                <a data-toggle="tab" role="tab" class="nav-link" id="arivel_103_pp-tab" href="#arivel_103_pp"
+                                                    aria-controls="arivel_103_pp" aria-selected="false">
+                                                    <span>Carton Products</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item yellow_capsuls">
+                                                <a data-toggle="tab" role="tab" class="nav-link" id="arivel_104_pp-tab" href="#arivel_104_pp"
+                                                    aria-controls="arivel_104_pp" aria-selected="false">
+                                                    <span>Cups &amp; Bowels</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item yellow_capsuls">
+                                                <a data-toggle="tab" role="tab" class="nav-link" id="arivel_105_pp-tab" href="#arivel_105_pp"
+                                                    aria-controls="arivel_105_pp" aria-selected="false">
+                                                    <span>Napkins</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item yellow_capsuls">
+                                                <a data-toggle="tab" role="tab" class="nav-link" id="arivel_106_pp-tab" href="#arivel_106_pp"
+                                                    aria-controls="arivel_106_pp" aria-selected="false">
+                                                    <span>Wraps</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="tab_slider">
+                                    <div role="tabpanel" class="tab-pane fade show active" aria-labelledby="arivel_100_pp-tab" id="arivel_100_pp">
+                                        <div class="easy">
+                                            <div class="easy">
+                                            
+                                            <div *ngFor="let i of [].constructor(35)" class="item col-3 pls_50_on_web">
+                                                <div class="product_wrap">
+                                                    <a>
+                                                        <div class="product_img" style="background: #e9eef1; width: 100%;">
+                                                            
+                                                        </div>
+                                                    </a>
+                                                    <div class="product_info minht110 pb-0">
+                                                        <h6 class="product_title" style="background: #e9eef1; width: 100%; height: 20px;">
+                                                            <a ></a>
+                                                        </h6>
+                                                        <div class="product_price" style="background: #e9eef1; width: 100%; height: 20px;">
+                                                            <span class="price" ></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div></div>
+
+    	<div class="row width83p" *ngIf="tabsv2.length>0">
+        	<div class="col-xl-12">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="heading_tab_header">
+                            <div class="heading_s2">
+                                <h4 *ngIf="selectedLang!=1">SouqPack Products</h4>
+                                <h4 *ngIf="selectedLang==1">منتجات حصرية</h4>
+                            </div>
+                            <div class="tab-style2">
+                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#tabmenubar" aria-expanded="false"> 
+                                    <span class="ion-android-menu"></span>
+                                </button>
+                                <ul class="nav nav-tabs justify-content-center justify-content-md-end" id="tabmenubar" role="tablist">
+                                    <li *ngFor="let tab of tabsv2; let tab_i=index;" class="nav-item yellow_capsuls">
+                                        <a class="nav-link " [class.active]="addso(tab_i)==100"  [attr.id]="'arivel_'+addso(tab_i)+'_pp-tab'" [attr.href]="'#arivel_'+addso(tab_i)+'_pp'" [attr.aria-controls]="'arivel_'+addso(tab_i)+'_pp'" data-toggle="tab" role="tab" [attr.aria-selected]="addso(tab_i)==100">
+                                            <span >{{tab.title}}</span>
+                                        </a>
+                                    </li>
+                                    <!-- <li class="nav-item">
+                                        <a class="nav-link" id="sellers-tab" data-toggle="tab" href="#sellers" role="tab" aria-controls="sellers" aria-selected="false">Best Sellers</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="featured-tab" data-toggle="tab" href="#featured" role="tab" aria-controls="featured" aria-selected="false">Featured</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="special-tab" data-toggle="tab" href="#special" role="tab" aria-controls="special" aria-selected="false">Special Offer
+                                        </a>
+                                    </li> -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="tab_slider">
+                            <div *ngFor="let tab of tabsv2; let tab_i = index;" class="tab-pane fade  "  [attr.aria-labelledby]="'arivel_'+addso(tab_i)+'_pp-tab'" [class.show]="addso(tab_i)==100" [class.active]="addso(tab_i)==100" [attr.id]="'arivel_'+addso(tab_i)+'_pp'" role="tabpanel">
+                                <div class="easy">
+                                <div class="easy">
+                                    <div *ngFor="let prod of tab.products; let prod_ind=index;" class="item col-3 pls_50_on_web">
+                                        <div class="product_wrap">
+                                            <a routerLink="/product/{{prod.slug}}">
+
+                                            <div class="product_img">
+                                                    <img 
+                                                    [attr.data-src]="php_url+'resources/uploads/products/'+prod.image" [attr.src]="defaul_image"
+                                                    alt="el_img1" loading="lazy">
+                                                
+                                               
+                                            </div>
+                                        </a>
+                                            <div class="product_info minht110 pb-0">
+                                                <h6 class="product_title"><a routerLink="/product/{{prod.slug}}">{{prod.title}}</a></h6>
+                                                <div *ngIf="prod.discount_text!=''" class="product_price">
+                                                    <span class="price">{{prod.discounted_text}}</span>
+                                                    <del>{{prod.real_price_text}}</del>
+                                                    <div class="on_sale" *ngIf="selectedLang!=1">
+                                                        <span>{{prod.discount_text}} Off</span>
+                                                    </div>
+                                                    <div class="on_sale" *ngIf="selectedLang==1" style="direction: ltr;">
+                                                        <span> {{prod.discount_text}} خصم</span>
+                                                    </div>
+                                                </div>
+                                                <div *ngIf="prod.discount_text==''" class="product_price">
+                                                    <span class="price">{{prod.real_price_text}}</span>
+                                                    
+                                                </div>
+                                        
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="easy d-flex justify-content-center align-items-center" style="padding:15px 0;">
+                                    <a routerLink="/category/{{tab.slug}}" class="view_more_btn" *ngIf="selectedLang!=1" >View More</a>
+                                    <a routerLink="/category/{{tab.slug}}" class="view_more_btn" *ngIf="selectedLang==1" >عرض المزيد</a>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        	</div>
+        </div>
+    </div>
+</div>
+<!-- END SECTION SHOP -->
+
+<!-- START SECTION BANNER --> 
+<!-- <div class="section pb_20 small_pt">
+	<div class="custom-container d-flex justify-content-center">
+    	<div class="row width83p">
+        	<div  *ngFor="let offer of offers" class="col-md-4">
+            	<div class="sale-banner mb-3 mb-md-4">
+                	<a class="hover_effect1 home_offer_a" routerLink="/offer/{{offer.slug}}">
+                        <img [attr.src]="php_url + 'resources/uploads/offers/'+offer.image" alt="shop_banner_img7">
+                       
+                    </a>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+</div> -->
+<!-- END SECTION BANNER --> 
+
+
+
+<!-- START SECTION SHOP -->
+<!-- <div *ngIf="prods.length>0" class="section pt-3 small_pb">
+	<div class="custom-container d-flex justify-content-center">
+    	<div class="row width83p">
+        	
+        	<div class="col-xl-12">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="heading_tab_header">
+                            <div class="heading_s2">
+                                <h4 *ngIf="selectedLang!=1">SouqPack Products</h4>
+                                <h4 *ngIf="selectedLang==1">منتجات سوق</h4>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div *ngFor="let prod of prods; let prod_ind=index;" class="item col">
+                        <div class="product_wrap">
+                            <a routerLink="/product/{{prod.slug}}">
+                            <div class="product_img">
+                                
+                                    <img src="{{php_url+'resources/uploads/products/'+prod.image}}" alt="el_img1">
+                                
+                              
+                            </div>
+                        </a>
+                            <div class="product_info pb-0 minht110">
+                                <h6 class="product_title"><a routerLink="/product/{{prod.slug}}">{{prod.title}}</a></h6>
+                                <div *ngIf="prod.discount_text!=''" class="product_price">
+                                    <span class="price">{{prod.discounted_text}}</span>
+                                    <del>{{prod.real_price_text}}</del>
+                                    <div class="on_sale">
+                                        <span>{{prod.discount_text}}</span>
+                                    </div>
+                                </div>
+                                <div *ngIf="prod.discount_text==''" class="product_price">
+                                    <span class="price">{{prod.real_price_text}}</span>
+                                    
+                                </div>
+                               
+                                <div class="pr_desc">
+                                    <p>{{prod.description}}</p>
+                                </div>
+                            </div>
+                            
+                            
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+        	</div>
+        </div>
+    </div>
+</div> -->
+<!-- END SECTION SHOP -->
+
+<!-- START SECTION CLIENT LOGO -->
+<div class="section pt-3 small_pb">
+	<div class="custom-container d-flex align-items-center flex-d-colomn">
+    	<!-- <div class="row width83p pb-0">
+			<div class="col-md-12">
+            	<div class="heading_tab_header">
+                    <div class="heading_s2">
+                        <h4 *ngIf="selectedLang!=1">Our Clients</h4>
+                        <h4 *ngIf="selectedLang==1">عملائنا</h4>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <div class="row width83p only_owl_stage">
+        	<div class="col-12">
+            	<div class="client_logo carousel_slider owl-carousel owl-theme nav_style3" data-dots="false" data-nav="true" data-margin="30" data-loop="false" data-autoplay-timeout="1500" data-autoplay="true" data-responsive='{"0":{"items": "3"}, "480":{"items": "4"}, "767":{"items": "5"}, "991":{"items": "6"}, "1199":{"items": "7"}}'>
+                	<div *ngFor="let brand of brands" class="item">
+                    	<div class="cl_logo">
+                            <img 
+                            [attr.data-src]="php_url + 'resources/uploads/brands/'+brand.image" [attr.src]="defaul_image"
+                            alt="shop_banner_img7" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+<!-- END MAIN CONTENT -->

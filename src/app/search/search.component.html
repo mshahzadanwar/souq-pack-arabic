@@ -1,0 +1,92 @@
+
+<!-- START SECTION SHOP -->
+<div class="section small_pt small_pb">
+	<div class="custom-container d-flex justify-content-center">
+
+        <div class="row width83p">
+        	<div class="col-xl-12">
+                <div class="row"  *ngIf="tabsv2.length==0">
+                    <div *ngIf="selectedLang!=1"  class="col-md-12 text-center">
+                        <span *ngIf="!loading">No Items</span>
+                        <span *ngIf="loading">Searching...</span>
+                    </div>
+                    <div *ngIf="selectedLang==1"  class="col-md-12 text-center">
+                        <span *ngIf="!loading">لا توجد عناصر</span>
+                        <span *ngIf="loading">يبحث...</span>
+                    </div>
+                </div>
+        	</div>
+        	<div class="col-xl-12">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="heading_tab_header">
+                            <div class="heading_s2">
+                                <h4 *ngIf="selectedLang!=1">Search: {{search.search}}</h4>
+                                <h4 *ngIf="selectedLang==1">بحث: {{search.search}}</h4>
+                            </div>
+                            <div class="tab-style2">
+                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#tabmenubar" aria-expanded="false"> 
+                                    <span class="ion-android-menu"></span>
+                                </button>
+                                <ul class="nav nav-tabs justify-content-center justify-content-md-end" id="tabmenubar" role="tablist">
+                                    <li *ngFor="let tab of tabsv2; let tab_i=index;" class="nav-item yellow_capsuls">
+                                        <a class="nav-link " [class.active]="addso(tab_i)==100"  [attr.id]="'arivel_'+addso(tab_i)+'_pp-tab'" [attr.href]="'#arivel_'+addso(tab_i)+'_pp'" [attr.aria-controls]="'arivel_'+addso(tab_i)+'_pp'" data-toggle="tab" role="tab" [attr.aria-selected]="addso(tab_i)==100">
+                                            <span >{{tab.title}}</span>
+                                        </a>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="tab_slider">
+                            <div *ngFor="let tab of tabsv2; let tab_i = index;" class="tab-pane fade  "  [attr.aria-labelledby]="'arivel_'+addso(tab_i)+'_pp-tab'" [class.show]="addso(tab_i)==100" [class.active]="addso(tab_i)==100" [attr.id]="'arivel_'+addso(tab_i)+'_pp'" role="tabpanel">
+                                <div class="easy">
+                                <div *ngIf="tab.products.length==0" class="easy text-center">
+                                        <span *ngIf="selectedLang!=1" class="easy text-center">No Products Found</span>
+                                        <span *ngIf="selectedLang==1" class="easy text-center">لا توجد منتجات</span>
+                                </div>
+                                <div class="easy">
+                                    <div *ngFor="let prod of tab.products; let prod_ind=index;" class="item col-3 pls_50_on_web">
+                                        <div class="product_wrap">
+                                            <a routerLink="/product/{{prod.slug}}">
+                                                <div class="product_img">
+                                                    <img src="{{php_url+'resources/uploads/products/'+prod.image}}" alt="el_img1">
+                                                </div>
+                                            </a>
+                                            <div class="product_info minht110 pb-0">
+                                                <h6 class="product_title"><a routerLink="/product/{{prod.slug}}">{{prod.title}}</a></h6>
+                                                <div *ngIf="prod.discount_text!=''" class="product_price">
+                                                    <span class="price">{{prod.discounted_text}}</span>
+                                                    <del>{{prod.real_price_text}}</del>
+                                                    <div class="on_sale">
+                                                        <span>{{prod.discount_text}}</span>
+                                                    </div>
+                                                </div>
+                                                <div *ngIf="prod.discount_text==''" class="product_price">
+                                                    <span class="price">{{prod.real_price_text}}</span>
+                                                    
+                                                </div>
+                                               
+                                                <div class="pr_desc">
+                                                    <p>{{prod.description}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        	</div>
+        </div>
+    	
+    </div>
+</div>
+<!-- END SECTION SHOP -->

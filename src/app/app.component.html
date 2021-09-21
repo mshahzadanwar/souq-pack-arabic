@@ -1,0 +1,8 @@
+<div *ngIf="dataloaded" (click)="bodyClicked($event)">
+<app-header></app-header>
+<router-outlet></router-outlet>
+<app-footer ></app-footer>
+</div>
+<ngx-loading-bar></ngx-loading-bar>
+<app-notification-alerts style="float:left;width:100%;"></app-notification-alerts>
+<app-screenblocker></app-screenblocker>

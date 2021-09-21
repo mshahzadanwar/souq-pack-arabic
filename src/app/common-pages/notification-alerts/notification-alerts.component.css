@@ -1,0 +1,39 @@
+.notification-alert{
+    position: fixed;
+    z-index: 100;
+    bottom: 2%;
+    right: 1%;
+    background: #f9ca03;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 0px 5px 6px 0;
+    width: 30%;
+    text-align: left;
+    left: 0;
+    padding: 7px;
+    z-index: 99999;
+}
+.danger{
+    background: red;
+}
+.warning{
+    background: #5a5a5a;
+}
+.main-notif{
+    float: left;
+    width: 100%;
+    position: relative;
+    padding: 7px 3px;
+    line-height: 20px;
+    text-transform: capitalize;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+}
+.main-notif .cross-notif{
+position: absolute;
+top: 1px;
+right: 2px;
+color: white;
+cursor: pointer;
+}

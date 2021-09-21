@@ -1,0 +1,27 @@
+<span class="payment_section col-md-6" style="margin-bottom: 30px;">
+    <div class="easy thank_you" *ngIf="selectedLang!=1">
+        Thank you for shopping from Souqpack 
+    </div>
+    <p  *ngIf="selectedLang!=1" style="text-align: center;
+    font-size: 16px;">
+        Your payment has been received, your order will be processed soon for delivery by Souq pack team.
+    </p>
+
+    <div class="easy thank_you" *ngIf="selectedLang==1">
+        شكرا لتسوقك من سوق باك
+    </div>
+    <p *ngIf="selectedLang==1" style="text-align: center;
+    font-size: 16px;">
+        تم استلام طلبك, سيقوم فريق عمل سوق باك بالعمل على اتمام وتوصيل الطلب في أسرع وقت ممكن      
+    </p>
+
+    <div class="">
+        <a routerLink="/">
+            <button type="button" class="btn btn-secondary" style="background: #f9ca03; border:1px solid #f9ca03">{{selectedLang==1?"اذهب للتسوق":"Continue Shopping"}}</button>
+        </a>
+        <a routerLink="/profile">
+            <button type="button" class="btn btn-secondary" style="margin-left: 10px; margin-right: 10px;">{{selectedLang==1?"طلباتي":"My Orders"}}</button>
+        </a>
+    </div>
+    
+</span>

@@ -1,0 +1,708 @@
+<div *ngIf="!ready" class="loading_cust">Loading...</div>
+<div *ngIf="ready" class="cust_main">
+    <div class="cust_header">
+        <div class="cust_header_left"></div>
+        <div class="cust_header_center" *ngIf="selectedLang!=1">
+            <i class="fas fa-boxes"></i> Customize Your Order
+        </div>
+        <div class="cust_header_center" *ngIf="selectedLang==1">
+            <i class="fas fa-boxes" style="margin-left: 10px;"></i> صمم منتجك
+        </div>
+        
+        <div class="cust_header_right">
+            <!-- <button type="button">
+                <i class="fa fa-times"></i>
+            </button> -->
+        </div>
+    </div>
+    <div class="cust_cont_cont">
+        <div class="cust_cont">
+            <div class="cust_logo_line">
+                <div class="cust_logo_self">
+                    <!-- <img src="./../../assets/images/s_icon.png" /> -->
+                </div>
+                <div class="cust_top_boxes_container">
+                    <div *ngFor="let cat of categories; let i=index;" class="cust_box_top" [class.cust_box_top_active]="cat.selected==1" (click)="mainChange(i)">
+                        <img src="{{php_url+'resources/uploads/categories/'+cat.image}}" />
+                        {{cat.title}}
+                    </div>
+                </div>
+            </div>
+            <div class="cust_main_line">
+                <div class="cust_main_left">
+                    <div class="cust_left_boxes_container" id="myDiv">
+                        <div *ngFor="let cat of selected_cat.subs; let i=index;" class="cust_box_left" [class.cust_box_left_active]="cat.selected==1" (click)="miniChange(i)">
+                            {{cat.title}}
+                        </div>
+                    </div>
+                </div>
+                <div class="cust_main_right" *ngIf="option_enabled">
+                    <div class="cust_main_img">
+                        <div class="cust_main_img_cont" *ngIf="this.final_form.more_images.length==0">
+                            <img src="{{php_url+'resources/uploads/categories/'+current_cust_image}}" />
+                        </div>
+                        <!---SLIDER CATEGORY-->
+                        <div id="carouselExampleControls" class="carousel slide carousel-fade light_arrow" data-ride="carousel" data-touch="true"  *ngIf="this.final_form.more_images.length>0">
+                               <div class="carousel-inner" style="background: #fff;
+                               padding: 8px;
+                               border-radius: 5px;">
+                                   
+                                    <div *ngFor="let slider of this.final_form.more_images; let ii=index;" class="carousel-item  background_bg no_repeat_bg" [class.active]="ii==0" >    
+                                        <div class="banner_slide_content banner_content_inner">
+                                                <img src="{{php_url+'resources/uploads/categories/'+slider}}" style="width: 100%; " />
+                                        </div>
+                                    </div>
+                                </div>
+                                <ol class="carousel-indicators indicators_style3" style="position: relative;
+                                margin-top: 9px;">
+                                    <li *ngFor="let sliderss of this.final_form.more_images; let ij=index;" data-target="#carouselExampleControls" [attr.data-slide-to]="ij" [class.active]="ij==0"></li>
+                                </ol>
+                        
+                        </div>
+
+
+                        <div class="cust_control_box heightadjust" [class.minusen]="selectedLang!=1"  [class.minusar]="selectedLang==1" *ngIf="this.final_form.c_descps_en!='' && this.final_form.c_descps_en!=null">
+                            <div class="cust_c_b_title_cont">
+                                <div class="cust_c_b_title_i_no_bg">
+                                    <i class="far fa-sticky-note"></i>
+                                </div>
+                                <div class="cust_c_b_title">
+                                    <span *ngIf="selectedLang!=1"><strong>Description </strong></span>
+                                    <span *ngIf="selectedLang==1"><strong>الوصف</strong></span>
+                                </div>
+                            </div>
+                            <div class="cust_c_b_main" *ngIf="selectedLang!=1">
+                                <div 
+                                    class="notes_text parag" 
+                                    [class.leftmaren]="selectedLang!=1" 
+                                    [innerHTML]="this.final_form.c_descps_en">  
+                                </div>
+                        </div>
+                        <div class="cust_c_b_main" *ngIf="selectedLang==1">
+                                <div class="notes_text  parag" *ngIf="selectedLang == 1" [class.leftmarar]="selectedLang==1"  [innerHTML]="this.final_form.c_descps_ar">
+                                    <!-- {{this.selected_sub.terms_ar}} -->
+                                </div>
+                        </div>
+                            
+                        </div>
+                        
+                    </div>
+                    <div class="cust_main_controls">
+                        <div class="cust_control_box">
+                            <div class="cust_c_b_title_cont">
+                                <div class="cust_c_b_title_i">
+                                    <i class="fa fa-check"></i>
+                                </div>
+                                <div class="cust_c_b_title" *ngIf="selectedLang!=1">
+                                    <span style="font-weight: bold;"> {{final_form.c_title || "n"}}</span>
+                                </div>
+                                <div class="cust_c_b_title" *ngIf="selectedLang==1">
+                                    <span style="font-weight: bold;"> {{final_form.c_title_ar || "n"}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cust_control_box">
+                            <div class="cust_c_b_title_cont">
+                                <div class="cust_c_b_title_i">
+                                    <i class="fa fa-check"></i>
+                                </div>
+                                <div class="cust_c_b_title" *ngIf="selectedLang!=1">
+                                    <span style="font-weight: bold;">Start Your Order</span>
+
+                                </div>
+                                <div class="cust_c_b_title" *ngIf="selectedLang==1">
+                                    <span style="font-weight: bold;"> ابدأ طلبك</span>
+                                </div>
+                            </div>
+                            <div class="cust_c_b_main">
+                                <div class="cust_options">
+                                    <div class="cust_option" >
+                                        <label *ngIf="selectedLang!=1">Item Title</label>
+                                        <label *ngIf="selectedLang==1">اسم الصنف</label>
+                                        <select 
+                                        (change)="changeItemName(i,$event.target.selectedIndex)"
+                                        name="item_name_">
+                                            <option 
+                                            
+                                            *ngFor="let val of selected_sub.variations; let vi=index;"
+                                            [attr.data-index]="i"
+                                            [value]="selectedLang!=1?val.c_title:val.c_title_ar"
+                                            >
+                                            <span>{{selectedLang!=1?val.c_title:val.c_title_ar}}</span>
+                                            
+                                        </option>
+                                        </select>
+                                    </div>
+
+
+                                    <!-- base -->
+                                    <div class="cust_option" >
+                                        <label *ngIf="selectedLang!=1">Quantity {{final_form.unit_name || " "}}</label>
+                                        <label *ngIf="selectedLang==1">الكمية {{final_form.unit_name_ar}}</label>
+                                        <input 
+                                        (change)="updatQty()"
+                                        type="number" 
+                                        step=1
+                                        [(ngModel)]="final_form.statics.qty"
+
+                                        />
+                                    </div>
+
+                                    
+
+                                    <!-- w*h*g -->
+                                    <div class="cust_option">
+                                        <!-- <label *ngIf="selectedLang!=1">size</label>
+                                        <label *ngIf="selectedLang==1"></label> -->
+                                        <label *ngIf="selectedLang!=1">{{final_form.table_size_en || "size"}}</label>
+                                        <label *ngIf="selectedLang==1">{{final_form.table_size_ar || "الحجم"}}</label>
+                                        <select 
+                                        (change)="updateSize()"
+                                        [(ngModel)]="final_form.db_logic.row_index"
+                                        name="size_val">
+                                            <option 
+                                            
+                                            *ngFor="let val of final_form.db_logic.selected_table.rows; let vi=index;"
+                                            [value]="vi"
+                                            >{{val.whg}}</option>
+                                        </select>
+                                    </div>
+
+
+                                     <!-- color pints -->
+                                     <div class="cust_option">
+                                        <!-- <label *ngIf="selectedLang!=1">Color Faces</label>
+                                        <label *ngIf="selectedLang==1">وجوه ملونة</label> -->
+                                        <label *ngIf="selectedLang!=1">{{final_form.table_title_en || "Color Faces"}}</label>
+                                        <label *ngIf="selectedLang==1">{{final_form.table_title_ar || "أوجه الطباعة"}}</label>
+                                        
+                                        <select 
+                                        (change)="update_s_price()"
+                                        [(ngModel)]="final_form.db_logic.face_index"
+                                        name="face_val">
+                                            <option 
+                                            
+                                            *ngFor="let val of final_form.db_logic.selected_table.rows[final_form.db_logic.row_index].faces; let vi=index;"
+                                            [value]="vi"
+                                            >{{val.title}}</option>
+                                        </select>
+                                    </div>
+                                    
+
+                               <!-- - ({{val.price}} {{selected_sub.currency}}) -->
+                                    <div class="cust_option" *ngFor="let option of selected_sub.variations[selected_item_index].options; let i=index;">
+                                        <label *ngIf="selectedLang!=1">{{option.title}}</label>
+                                        <label *ngIf="selectedLang==1">{{option.title_ar}}</label>
+                                        <select 
+                                        (change)="changeMenu(i,$event.target.selectedIndex)"
+                                        [disabled]="option.disabled!=0"
+                                        name="option_{{option.id}}">
+                                     
+                                            <option 
+                                            
+                                            *ngFor="let val of option.options; let vi=index;"
+                                            [attr.data-index]="i"
+                                            [value]="val.en"
+                                            >
+                                            <span *ngIf="selectedLang!=1">{{val.en}}</span>
+                                            <span *ngIf="selectedLang==1">{{val.ar}}</span>
+                                        </option>
+                                        </select>
+                                    </div>
+
+                                    <!-- <div (click)="checkData()">Checkkk</div> -->
+
+                                    
+
+                                    <!-- Piece Price -->
+                                    <div class="cust_option" >
+                                        <label *ngIf="selectedLang!=1">Piece Price</label>
+                                        <label *ngIf="selectedLang==1">سعر الوحدة</label>
+                                        
+                                        <input 
+                                        
+                                        type="number" 
+                                        step=1
+                                        disabled
+                                        [(ngModel)]="final_form.statics.pc_price"
+
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="cust_control_box">
+                            <div class="cust_c_b_title_cont">
+                                <div class="cust_c_b_title_i_no_bg">
+                                    <i class="fa fa-edit"></i>
+                                </div>
+                                <div class="cust_c_b_title" *ngIf="selectedLang!=1">
+                                    <span style="font-weight: bold;">Printed Logo</span>
+                                </div>
+
+                                <div class="cust_c_b_title" *ngIf="selectedLang==1">
+                                    <span style="font-weight: bold;">تصميمك الخاص</span>
+                                </div>
+                            </div>
+                            <div class="cust_c_b_main">
+                                <div class="cust_c_b_hr cust_c_b_hr_custom_center">
+                                    <div class="cust_c_b_hr_left" (click)="logoType(1)">
+                                        <div class="cust_c_b_hr_checkbox">
+                                            <span [class.checkbox_inner]="logo_type==1"></span>
+                                        </div>
+                                        <div class="checkbox_label" *ngIf="selectedLang!=1">UPLOAD LOGO: </div>
+                                        <div class="checkbox_label" *ngIf="selectedLang==1" style="margin-right: 10px;">تحميل اللوجو:</div>
+                                    </div>
+                                    <div class="desc_holder_cc">
+                                        <div class="cust_c_b_hr_right" [class.bg_disabled_logo_]="logo_type==2">
+                                            <div class="logo_file_cont d_column">
+                                                <div class="logo_file c_pointer" (click)="!uploading?fileUploader.click():doNothing()">
+                                                    <span *ngIf="selectedLang!=1">
+                                                        <div class="logo_file_text" *ngIf="!uploading">Upload Logo File</div>
+                                                        <div class="logo_file_text" *ngIf="uploading">Uploading...</div>
+                                                    </span>
+                                                    <span *ngIf="selectedLang==1">
+                                                        <div class="logo_file_text" *ngIf="!uploading">تحميل ملف الشعار</div>
+                                                        <div class="logo_file_text" *ngIf="uploading">تحميل ...</div>
+                                                    </span>
+                                                    <div class="logo_file_icon">
+                                                        <i class="fa fa-upload"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="logo_print_cont">
+                                                <div class="logo_print">
+                                                    <div class="logo_file_text">Logo Print</div>
+                                                    <div class="logo_file_icon">
+                                                        <select
+                                                        [(ngModel)]="final_form.logo.logo_file.logo_print"
+                                                        [disabled]="logo_type==2"
+                                                        >
+                                                            <option>UV</option>
+                                                            <option>UX</option>
+                                                            <option>UZ</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="logo_print_cont logo_print_cont2">
+                                                <div class="logo_print">
+                                                    <div class="logo_file_text">Logo Colors</div>
+                                                    <div class="logo_file_icon">
+                                                        <select
+                                                        [(ngModel)]="final_form.logo.logo_file.logo_colors"
+                                                        [disabled]="logo_type==2"
+                                                        >
+                                                            <option>4</option>
+                                                            <option>5</option>
+                                                            <option>6</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="logo_print_cont logo_print_cont3">
+                                                <div class="logo_print">
+                                                    <div class="logo_file_text">Stamps</div>
+                                                    <div class="logo_file_icon">
+                                                        <select 
+                                                        [(ngModel)]="final_form.logo.logo_file.logo_stamps"
+                                                        >
+                                                            <option>4</option>
+                                                            <option>5</option>
+                                                            <option>6</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                        <div class="cust_c_b_hr_right">
+                                            <div class="file_preview" *ngIf="file_preview_src!=''">
+                                                <img [src]="file_preview_src" style="width: 60px;" />
+                                                <button type="button" class="remove_image" (click)="file_preview_src=''">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="cust_c_b_hr cust_c_b_hr_custom_center">
+                                    <div class="cust_c_b_hr_left" (click)="logoType(2)">
+                                        <div class="cust_c_b_hr_checkbox">
+                                            <span [class.checkbox_inner]="logo_type==2"></span>
+                                        </div>
+                                        <div class="checkbox_label" *ngIf="selectedLang!=1">Create Logo: </div>
+                                        <div class="checkbox_label" *ngIf="selectedLang==1" style="margin-right: 10px;">صمم لوجو جديد:</div>
+                                    </div>
+                                    <div class="desc_holder_cc">
+                                    <div class="cust_c_b_hr_right" [class.bg_disabled_logo_]="logo_type==1">
+                                        <div class="logo_file_cont">
+                                            <div class="logo_file " *ngIf="selectedLang!=1" >
+                                                <input
+                                                [(ngModel)]="final_form.logo.logo_create.logo_name"
+                                                [disabled]="logo_type==1"
+                                                placeholder="Logo Name"
+                                                 />
+                                            </div>
+                                            <div class="logo_file " *ngIf="selectedLang==1" >
+                                                <input
+                                                [(ngModel)]="final_form.logo.logo_create.logo_name"
+                                                [disabled]="logo_type==1"
+                                                placeholder="اسم اللوجو"
+                                                 />
+                                            </div>
+                                        </div>
+                                        <!-- <div class="logo_create_cont2">
+                                            <div class="logo_file ">
+                                                <input
+                                                [(ngModel)]="final_form.logo.logo_create.logo_name_2"
+                                                [disabled]="logo_type==1"
+                                                placeholder="Logo Name"
+                                                 />
+                                            </div>
+                                        </div> 
+                                        
+                                        <div class="logo_print_cont logo_print_cont22">
+                                            <div class="logo_print">
+                                                <div class="logo_file_text">Logo Colors</div>
+                                                <div class="logo_file_icon">
+                                                    <select 
+                                                    [(ngModel)]="final_form.logo.logo_create.logo_colors"
+                                                    [disabled]="logo_type==1">
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        -->
+                                    </div>
+                                        <div class="cust_c_b_hr_right" [class.bg_disabled_logo_]="logo_type==1">
+                                            <div class="logo_desc_cont">
+                                                <div class="logo_file " *ngIf="selectedLang!=1">
+                                                    <input
+                                                    [(ngModel)]="final_form.logo.logo_create.logo_desc"
+                                                    [disabled]="logo_type==1"
+                                                    placeholder="Description"
+                                                    />
+                                                </div>
+                                                <div class="logo_file " *ngIf="selectedLang==1">
+                                                    <input
+                                                    [(ngModel)]="final_form.logo.logo_create.logo_desc"
+                                                    [disabled]="logo_type==1"
+                                                    placeholder="وصف اللوجو / الشعار"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+
+
+                        <div class="cust_control_box cust_control_boxv2">
+                            <div class="cust_control_box_v2_p1" style="padding: 3px 10px;border: none;">
+                                <div class="cust_c_b_title_cont" [class.engcolor]="selectedLang!=1" [class.arbcolor]="selectedLang==1">
+                                    <div class="cust_c_b_title_i_no_bg">
+                                        <i class="fa fa-circle"></i>
+                                    </div>
+                                    <div class="cust_c_b_title" *ngIf="selectedLang!=1">
+                                       <span style="font-weight: bold;">Product Color</span>
+                                    </div>
+                                    <div class="cust_c_b_title" *ngIf="selectedLang==1">
+                                        <span style="font-weight: bold;">اختار لون المنتج</span>
+                                    </div>
+                                </div>
+                                <div class="cust_c_b_main cust_c_b_main_right">
+                                    <div class="just_center_please">
+                                        <div class="cust_c_b_hr_left cust_c_b_hr_left2" (click)="colorType(1)">
+                                           
+                                            <input
+                                                [disabled]="color_type==2"
+                                                [(ngModel)]="final_form.color.choose_color.color"
+                                                class="logo_color_selector" type="color"
+                                                [class.arleftcolor]="selectedLang==1"
+                                                [class.engleftcolor]="selectedLang!=1"
+                                                
+                                                />
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                             <!-- <div class="cust_c_b_hr_checkbox">
+                                                <span [class.checkbox_inner]="color_type==1"></span>
+                                            </div> -->
+                                            <!-- <div class="checkbox_label" *ngIf="selectedLang!=1">Choose Your Color: </div>
+                                            <div class="checkbox_label" *ngIf="selectedLang==1" style="margin-right: 10px;    margin-left: 10px;">اختار اللون:</div> -->
+                            <!-- <div class="cust_control_box_v2_p2">
+                                <div class="just_bottom_left_please">
+                                    <div class="cust_c_b_hr_left cust_c_b_hr_left2" (click)="colorType(2)">
+                                        <div class="cust_c_b_hr_checkbox">
+                                            <span [class.checkbox_inner]="color_type==2"></span>
+                                        </div>
+                                        <div class="checkbox_label" *ngIf="selectedLang!=1">Write your custom Print color: </div>
+                                        <div class="checkbox_label" *ngIf="selectedLang==1" style="margin-right: 10px;">ضع كود الطباعة ( اختياري):</div>
+                                    </div>
+                                    <div class="cyan_megneta_input">
+                                        <div>
+                                            <span>C:</span>
+                                            <input
+                                            [disabled]="color_type==1"
+                                            type="number"
+                                            (change)="toRGB()"
+                                            (keyup)="toRGB()"
+                                            [(ngModel)]="final_form.color.create_color.color.c" name="c" id="c"
+                                            />
+                                        </div>
+                                        <div>
+                                            <span>M:</span>
+                                            <input
+                                            [disabled]="color_type==1"
+                                            type="number"
+                                            (change)="toRGB()"
+                                            (keyup)="toRGB()"
+                                            [(ngModel)]="final_form.color.create_color.color.m" name="m" id="m"
+                                            />
+                                        </div>
+                                        <div>
+                                            <span>Y:</span>
+                                            <input
+                                            [disabled]="color_type==1"
+                                            type="number"
+                                            (change)="toRGB()"
+                                            (keyup)="toRGB()"
+                                            [(ngModel)]="final_form.color.create_color.color.y" name="y" id="y"
+                                            />
+                                        </div>
+                                        <div>
+                                            <span>K:</span>
+                                            <input
+                                            [disabled]="color_type==1"
+                                            type="number"
+                                            (change)="toRGB()"
+                                            (keyup)="toRGB()"
+                                            [(ngModel)]="final_form.color.create_color.color.k" name="k" id="k"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="cyan_megneta_shower">
+                                        <span *ngIf="selectedLang!=1">Color Preview</span>
+                                        <span *ngIf="selectedLang==1">معاينة اللون</span>
+                                        <span [style.background]="theRGBcolor"></span>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+
+
+
+                        <div class="cust_control_box" [class.onmobile_mb_safe]="this.selected_sub.terms_en == ''" [class.m-b-70-cus]="this.selected_sub.terms_en == ''">
+                            <div class="cust_c_b_title_cont">
+                                <div class="cust_c_b_title_i_no_bg">
+                                    <i class="far fa-sticky-note"></i>
+                                </div>
+                                <div class="cust_c_b_title">
+                                    <span *ngIf="selectedLang!=1"><strong>Notes</strong></span>
+                                    <span *ngIf="selectedLang==1"><strong>اضافة ملاحظات</strong></span>
+                                </div>
+                            </div>
+                            <div class="cust_c_b_main" *ngIf="selectedLang!=1">
+                                <textarea 
+                                [(ngModel)]="final_form.notes"
+                                rows="3"
+                                [class.leftmaren]="selectedLang!=1"
+                                class="notes_text_area"
+                                placeholder="{{this.selected_sub.note_text_en}}"
+                                ></textarea>
+                            </div>
+                            <div class="cust_c_b_main" *ngIf="selectedLang==1">
+                                <textarea 
+                                [(ngModel)]="final_form.notes"
+                                rows="3"
+                                [class.leftmarar]="selectedLang==1"
+                                class="notes_text_area"
+                                placeholder="{{this.selected_sub.note_text_ar}}"
+                                ></textarea>
+                            </div>
+                            
+                        </div>
+                        <div class="cust_control_box m-b-70-cus onmobile_mb_safe" *ngIf="(this.selected_sub.terms_en != '' || this.selected_sub.terms_ar !='')">
+                            <div class="cust_c_b_title_cont">
+                                <div class="cust_c_b_title_i_no_bg">
+                                    <i class="far fa-sticky-note"></i>
+                                </div>
+                                <div class="cust_c_b_title">
+                                    <span *ngIf="selectedLang!=1"><strong>Terms and Conditions</strong></span>
+                                    <span *ngIf="selectedLang==1"><strong>الشروط والأحكام                    </strong></span>
+                                </div>
+                            </div>
+                            <div class="cust_c_b_main" *ngIf="selectedLang!=1">
+                                    <div class="notes_text" [class.leftmaren]="selectedLang!=1"  *ngIf="selectedLang != 1 && this.selected_sub.terms_en != '' " [innerHTML]="this.selected_sub.terms_en">
+                                            
+                                        </div>
+                                        <!-- <div class="notes_text" [class.leftmaren]="selectedLang==1" *ngIf="selectedLang == 1 && this.selected_sub.terms_ar != ''"  [innerHTML]="this.selected_sub.terms_ar">
+                                        </div> -->
+                            </div>
+                            <div class="cust_c_b_main" *ngIf="selectedLang==1">
+                                    <div class="notes_text" *ngIf="selectedLang == 1" [class.leftmarar]="selectedLang==1"  [innerHTML]="this.selected_sub.terms_ar">
+                                        <!-- {{this.selected_sub.terms_ar}} -->
+                                    </div>
+                        </div>
+                        </div>
+                        
+
+
+
+                    </div>
+                </div>
+                <div class="cust_main_right" *ngIf="!option_enabled">
+                        <div class="not_enabled">
+                                Price table for this category is not enabled from souqpack team, Please try again later.
+                        </div>
+                </div>
+            </div>
+
+
+            <div class="cust_total_line" *ngIf="option_enabled">
+                <div class="tota_input_cont">
+                    <div class="total_input_text" *ngIf="selectedLang!=1">
+                        Item Price 
+                    </div>
+                    <div class="total_input_text" *ngIf="selectedLang==1">
+                        سعر الصنف                    
+                    </div>
+                    <input
+                    disabled
+                    [(ngModel)]="total.price"
+                    />
+                </div>
+
+                <div class="tota_input_cont">
+                    <div class="total_input_text" *ngIf="selectedLang!=1">
+                        Logo Price
+                    </div>
+                    <div class="total_input_text" *ngIf="selectedLang==1">
+                        سعر التصميم
+                    </div>
+                    <input
+                    disabled
+                    [(ngModel)]="total.logo"
+                    />
+                </div>
+                <!-- <div class="tota_input_cont">
+                    <div class="total_input_text" *ngIf="selectedLang!=1">
+                        Total Stamps
+                    </div>
+                    <div class="total_input_text" *ngIf="selectedLang==1">
+                        مجموع الطوابع
+                    </div>
+                    <input
+                    disabled
+                    [(ngModel)]="total.stamps_price"
+                    />
+                </div> -->
+
+                
+                <div class="tota_input_cont">
+                    <div class="total_input_text" *ngIf="selectedLang!=1">
+                        Shipping
+                    </div>
+                    <div class="total_input_text" *ngIf="selectedLang==1">
+                        رسوم الشحن
+                    </div>
+                    <input
+                    disabled
+                    [(ngModel)]="total.shipping"
+                    />
+                </div>
+                <!-- <div class="tota_input_cont">
+                    <div class="total_input_text" *ngIf="selectedLang!=1">
+                        VAT %
+                    </div>
+                    <div class="total_input_text" *ngIf="selectedLang==1">
+                        ٪ ضريبة القيمة المضافة
+                    </div>
+                    <input
+                    disabled
+                    [(ngModel)]="total.vat"
+                    />
+                </div> -->
+
+
+                <div class="tota_input_cont">
+                    <div class="total_input_text" *ngIf="selectedLang!=1">
+                        Delivery Time
+                    </div>
+                    <div class="total_input_text" *ngIf="selectedLang==1">
+                        مدة التسليم
+                    </div>
+                    <input
+                    *ngIf="selectedLang!=1"
+                    disabled
+                    [value]="selected_sub.delivery + ' Days'"
+                    />
+                    <input
+                    *ngIf="selectedLang==1"
+                    disabled
+                    [value]="selected_sub.delivery + ' يوم'"
+                    />
+                </div>
+
+
+                <div class="tota_input_cont">
+                    <div class="total_input_text" *ngIf="selectedLang!=1">
+                        Total (Vat Included)
+                    </div>
+                    <div class="total_input_text" *ngIf="selectedLang==1">
+                        الاجمالي شامل الضريبة 
+                    </div>
+                    <input
+                    disabled
+                    [(ngModel)]="total.sub_total"
+                    />
+                </div>
+                
+                <div class="tota_input_cont">
+                    <div class="total_input_text" *ngIf="selectedLang!=1">
+                        Down Payment
+                    </div>
+                    <div class="total_input_text" *ngIf="selectedLang==1">
+                        الدفعة الأولى
+                    </div>
+                    <input
+                    disabled
+                    [(ngModel)]="total.down"
+                    />
+                </div>
+                
+               
+                <div class="tota_input_cont tota_input_cont_less">
+                    <button type="button" class="buy_now_button" (click)="buyNow()">
+                        <span *ngIf="selectedLang!=1">SEND ORDER</span>
+                        <span *ngIf="selectedLang==1">ارسال الطلب</span>
+                    </button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <input type="file"
+        #fileUploader
+        id="file"
+        
+        style="opacity: 0;height: 0;width: 0;"
+        (change)="handleFileInput($event.target.files)"
+    >
+</div>

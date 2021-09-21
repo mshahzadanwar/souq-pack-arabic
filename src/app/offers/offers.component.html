@@ -1,0 +1,91 @@
+
+<!-- START SECTION SHOP -->
+<div class="section small_pt small_pb">
+	<div class="custom-container d-flex justify-content-center">
+    	<div class="row width83p">
+        	<!-- <div class="col-xl-3 d-none d-xl-block">
+            	<div class="sale-banner">
+                	<a class="hover_effect1" href="#">
+                		<img src="../../assets/images/shop_banner_img10.jpg" alt="shop_banner_img10">
+                    </a>
+                </div>
+            </div> -->
+        	<div class="col-xl-12">
+                <!-- <div class="row">
+                    <div class="col-12">
+                        <div class="heading_tab_header">
+                            <div class="heading_s2">
+                                <h4 *ngIf="selectedLang!=1">Offer: {{search.search}}</h4>
+                                <h4 *ngIf="selectedLang==1">بحث: {{search.search}}</h4>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div> -->
+                <div class="row"  *ngIf="prods.length==0">
+                    <div *ngIf="selectedLang!=1"  class="col-md-12 text-center">
+                        <span *ngIf="!loading">No Items</span>
+                        <span *ngIf="loading">Loading...</span>
+                    </div>
+                    <div *ngIf="selectedLang==1"  class="col-md-12 text-center">
+                        <span *ngIf="!loading">لا توجد عناصر</span>
+                        <span *ngIf="loading">يبحث...</span>
+                    </div>
+                </div>
+                <div class="row"  *ngIf="prods.length>0">
+                    <div class="col-12">
+                        
+                            <div *ngFor="let prod of prods; let prod_ind=index;" class="item col-md-3" style="float: left;">
+                                <div class="product_wrap">
+                                    <a routerLink="/product/{{prod.slug}}">
+                                    <div class="product_img">
+                                        
+                                            <img class="easy" src="{{php_url+'resources/uploads/products/'+prod.image}}" alt="el_img1">
+                                            <img style="width: 100%;" class="product_hover_img" src="{{php_url+'resources/uploads/products/'+prod.image}}" alt="el_img1">
+                                        
+                                        <!-- <div class="product_action_box">
+                                            <ul class="list_none pr_action_btn">
+                                                <li *ngIf="selectedLang!=1" class="add-to-cart"><a  (click)="addToCart(prod)"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
+                                                <li *ngIf="selectedLang==1" class="add-to-cart"><a  (click)="addToCart(prod)"><i class="icon-basket-loaded"></i> أضف إلى السلة</a></li>
+                                                <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
+                                                <li><a (click)="wish_prods(prod,prod_ind)"  [class.w_active]="prod.in_wish"><i class="icon-heart"></i></a></li>
+                                            </ul>
+                                        </div> -->
+                                    </div>
+                                </a>
+                                    <div class="product_info">
+                                        <h6 class="product_title"><a routerLink="/product/{{prod.slug}}">{{prod.title}}</a></h6>
+                                        <div *ngIf="prod.discount_text!=''" class="product_price">
+                                            <span class="price">{{prod.discounted_text}}</span>
+                                            <del>{{prod.real_price_text}}</del>
+                                            <div class="on_sale">
+                                                <span>{{prod.discount_text}}</span>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="prod.discount_text==''" class="product_price">
+                                            <span class="price">{{prod.real_price_text}}</span>
+                                            
+                                        </div>
+                                        <!-- <div class="rating_wrap">
+                                            <div class="rating">
+                                                <div class="product_rate" style="width:80%"></div>
+                                            </div>
+                                            <span class="rating_num">(21)</span>
+                                        </div> -->
+                                        <div class="pr_desc">
+                                            <p>{{prod.description}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                            
+                            
+                    </div>
+                </div>
+        	</div>
+        </div>
+    </div>
+</div>
+<!-- END SECTION SHOP -->

@@ -1,0 +1,235 @@
+<!-- START MAIN CONTENT -->
+<div class="main_content">
+
+<!-- START SECTION CONTACT -->
+<div class="section pb_70">
+	<div class="container">
+        <div class="row">
+            <div class="col-xl-4 col-md-6">
+            	<div class="contact_wrap contact_style3">
+                    <div class="contact_icon">
+                        <i class="linearicons-map2"></i>
+                    </div>
+                    <div class="contact_text">
+                        <span *ngIf="selectedLang!=1">Address</span>
+                        <span *ngIf="selectedLang==1">Address</span>
+                        <p><a href="https://maps.google.com/?{{printData.address}}" target="_blank">{{printData.address}}</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6">
+            	<div class="contact_wrap contact_style3">
+                    <div class="contact_icon">
+                        <i class="linearicons-envelope-open"></i>
+                    </div>
+                    <div class="contact_text">
+                        <span *ngIf="selectedLang!=1">Email Address</span>
+                        <a href="mailto:{{printData.email}}">{{printData.email}} </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6">
+            	<div class="contact_wrap contact_style3"> 
+                    <div class="contact_icon">
+                        <i class="linearicons-tablet2"></i>
+                    </div>
+                    <div class="contact_text">
+                        <span *ngIf="selectedLang!=1">Phone</span>
+                        <p><a href="tel:{{printData.phone}}">{{printData.phone}}</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END SECTION CONTACT -->
+
+<!-- START SECTION CONTACT -->
+<div class="section pt-0">
+	<div class="container">
+    	<div class="row">
+        	<div class="col-lg-3"></div>
+                <div class="col-lg-6">
+            	<div class="heading_s1">
+                	<h2 *ngIf="selectedLang!=1">Get In touch</h2>
+                </div>
+                <!-- <p class="leads" *ngIf="selectedLang!=1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius nunc id varius nunc.</p> -->
+                <div class="field_form">
+                    <form #signupform="ngForm" (ngSubmit)="onSubmit(signupform);" >
+                           
+
+                            <div class="form-group">
+                                <label *ngIf="selectedLang!=1">Name:
+                                  <sup>*</sup>
+                                </label>
+                                <label *ngIf="selectedLang==1">اسم:
+                                  <sup>*</sup>
+                                </label>
+                                <input  minlength="3" autocomplete="off" maxlength="255" required class="form-control"
+                                  [(ngModel)]="signup.firstname" type="text" name="firstname" id="firstname" #fname="ngModel">
+                                <small *ngIf="fname.invalid && (fname.dirty || fname.touched)" class="b_alert b_alert_danger">
+                  
+                                  <div *ngIf="fname.errors.required">
+                                    <span *ngIf="selectedLang!=1">Name is required.</span>
+                                    <span *ngIf="selectedLang==1">مطلوب اسم.</span>
+                                  </div>
+                  
+                                  <div *ngIf="fname.errors.minlength">
+                                    <span *ngIf="selectedLang!=1">Name must be at least 3 characters long.</span>
+                                    <span *ngIf="selectedLang==1">يجب ألا يقل الاسم عن 3 أحرف.</span>
+                                  </div>
+                                  <div *ngIf="fname.errors.maxlength">
+                                    <span *ngIf="selectedLang!=1">Name must be maximum 255 characters long.</span>
+                                    <span *ngIf="selectedLang==1">يجب ألا يزيد الاسم عن 255 حرفًا.</span>
+                                  </div>
+                  
+                  
+                                </small>
+                              </div>
+                              
+                              <!--email-->
+                              <div class="form-group">
+                                <label *ngIf="selectedLang!=1">Email Address:
+                                  <sup>*</sup>
+                                </label>
+                                <label *ngIf="selectedLang==1">عنوان البريد الالكترونى:
+                                  <sup>*</sup>
+                                </label>
+                                <input  minlength="7" autocomplete="off" maxlength="255" required class="form-control"
+                                  [(ngModel)]="signup.email" type="email" name="email" id="email" #email="ngModel">
+                                <small pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" *ngIf="email.invalid && (email.dirty || email.touched)" class="b_alert b_alert_danger">
+                  
+                                  <div *ngIf="email.errors.required">
+                                    <span *ngIf="selectedLang!=1">Email Address is required.</span>
+                                    <span *ngIf="selectedLang==1">عنوان البريد الإلكتروني مطلوب.</span>
+                                  </div>
+                  
+                                  <div *ngIf="email.errors.minlength">
+                                    <span *ngIf="selectedLang!=1">Email Address must be at least 7 characters long.</span>
+                                    <span *ngIf="selectedLang==1">يجب أن يكون عنوان البريد الإلكتروني 7 أحرف على الأقل.</span>
+                                  </div>
+                                  <div *ngIf="email.errors.maxlength">
+                                    <span *ngIf="selectedLang!=1">Email Address must be maximum 255 characters long.</span>
+                                    <span *ngIf="selectedLang==1">يجب أن يكون الحد الأقصى لعنوان البريد الإلكتروني 255 حرفاً.</span>
+                                  </div>
+                  
+                                  <div *ngIf="email.errors.pattern && !email.errors.minlength ">
+                                    <span *ngIf="selectedLang!=1">Email must be valid.</span>
+                                    <span *ngIf="selectedLang==1">يجب ان يكون البريد الاكتروني صحيح.</span>
+                                  </div>
+                  
+                  
+                                </small>
+                              </div>
+
+
+                              <div class="form-group">
+                                <label *ngIf="selectedLang!=1">Phone:
+                                  <sup>*</sup>
+                                </label>
+                                <label *ngIf="selectedLang==1">هاتف:
+                                  <sup>*</sup>
+                                </label>
+                                <input  minlength="10" autocomplete="off" maxlength="255" required class="form-control"
+                                  [(ngModel)]="signup.phone" type="tel" name="phone" id="phone" #phone="ngModel">
+                                <small *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="b_alert b_alert_danger">
+                  
+                                  <div *ngIf="phone.errors.required">
+                                    <span *ngIf="selectedLang!=1">Phone is required.</span>
+                                    <span *ngIf="selectedLang==1">الهاتف مطلوب.</span>
+                                  </div>
+                  
+                                  <div *ngIf="phone.errors.minlength">
+                                    <span *ngIf="selectedLang!=1">Phone must be at least 10 characters long.</span>
+                                    <span *ngIf="selectedLang==1">يجب ألا يقل طول الهاتف عن 10 أحرف.</span>
+                                  </div>
+                                  <div *ngIf="phone.errors.maxlength">
+                                    <span *ngIf="selectedLang!=1">Phone must be maximum 255 characters long.</span>
+                                    <span *ngIf="selectedLang==1">يجب ألا يزيد عدد أحرف الهاتف عن 255 حرفًا.</span>
+                                  </div>
+                                </small>
+                              </div>
+
+                              <div class="form-group">
+                                <label *ngIf="selectedLang!=1">Subject:
+                                  <sup>*</sup>
+                                </label>
+                                <label *ngIf="selectedLang==1">موضوع:
+                                  <sup>*</sup>
+                                </label>
+                                <input  minlength="10" autocomplete="off" maxlength="255" required class="form-control"
+                                  [(ngModel)]="signup.subject" type="text" name="subject" id="subject" #subject="ngModel">
+                                <small *ngIf="subject.invalid && (subject.dirty || subject.touched)" class="b_alert b_alert_danger">
+                  
+                                  <div *ngIf="subject.errors.required">
+                                    <span *ngIf="selectedLang!=1">Subject is required.</span>
+                                    <span *ngIf="selectedLang==1">الموضوع مطلوب.</span>
+                                  </div>
+                  
+                                  <div *ngIf="subject.errors.minlength">
+                                    <span *ngIf="selectedLang!=1">Subject must be at least 10 characters long.</span>
+                                    <span *ngIf="selectedLang==1">يجب ألا يقل الموضوع عن 10 أحرف.</span>
+                                  </div>
+                                  <div *ngIf="subject.errors.maxlength">
+                                    <span *ngIf="selectedLang!=1">Subject must be maximum 255 characters long.</span>
+                                    <span *ngIf="selectedLang==1">يجب ألا يزيد طول الموضوع عن 255 حرفًا.</span>
+                                  </div>
+                                </small>
+                              </div>
+
+
+                              <div class="form-group">
+                                <label *ngIf="selectedLang!=1">Message:
+                                  <sup>*</sup>
+                                </label>
+                                <label *ngIf="selectedLang==1">رسالة:
+                                  <sup>*</sup>
+                                </label>
+                                <textarea 
+                                minlength="50" 
+                                autocomplete="off" 
+                                cols="5"
+                                
+                                required 
+                                class="form-control"
+                                  [(ngModel)]="signup.msg"  name="msg" id="msg" #msg="ngModel"></textarea>
+                                <small *ngIf="msg.invalid && (msg.dirty || msg.touched)" class="b_alert b_alert_danger">
+                  
+                                  <div *ngIf="msg.errors.required">
+                                    <span *ngIf="selectedLang!=1">Message is required.</span>
+                                    <span *ngIf="selectedLang==1">الرسالة مطلوبة.</span>
+                                  </div>
+                  
+                                  <div *ngIf="msg.errors.minlength">
+                                    <span *ngIf="selectedLang!=1">Message must be at least 50 characters long.</span>
+                                    <span *ngIf="selectedLang==1">يجب ألا يقل طول الرسالة عن 50 حرفًا.</span>
+                                  </div>
+                                  
+                                </small>
+                              </div>
+                           
+                          
+                            <div class="col-md-12">
+                              <div class="row" *ngIf="selectedLang!=1">
+                                <button [disabled]="!signupform.form.valid" [class.mousenotallowed]="!signupform.form.valid" type="submit" class="btn btn-fill-out"
+                                name="submit" id="submit">Submit</button>
+                              </div>
+                              <div class="row" *ngIf="selectedLang==1">
+                                <button [disabled]="!signupform.form.valid" [class.mousenotallowed]="!signupform.form.valid" type="submit" class="btn btn-fill-out"
+                                name="submit" id="submit">إرسال</button>
+                              </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div id="alert-msg" class="alert-msg text-center"></div>
+                            </div>
+                    </form>		
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<!-- END SECTION CONTACT -->
+
+</div>
+<!-- END MAIN CONTENT -->

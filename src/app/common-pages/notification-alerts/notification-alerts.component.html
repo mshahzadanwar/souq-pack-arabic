@@ -1,0 +1,6 @@
+<div *ngIf="shown_notif" class="notification-alert" [class.danger]="error_notif" [class.warning]="warning_notif">
+  <div class="main-notif">
+   {{notif_data}}
+  <i (click)="hideNotif()" class="fa fa-times cross-notif"></i>
+  </div>
+</div>

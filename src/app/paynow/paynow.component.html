@@ -1,0 +1,34 @@
+<span class="payment_section col-md-6" *ngIf="show_paypal">
+    <h4 *ngIf="selectedLang!=1">Pay {{total}} {{currency}} to complete your order</h4>
+    <h4 *ngIf="selectedLang==1">لإكمال طلبك {{total}} {{currency}} دفع</h4>
+    <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+
+</span>
+<span class="payment_section  col-md-5" *ngIf="show_payfort">
+    <h4 *ngIf="selectedLang!=1">Pay {{total}} {{currency}} to complete your order</h4>
+    <h4 *ngIf="selectedLang==1">لإكمال طلبك يرجي دفع  <span>{{total}} {{currency}}</span></h4>
+    <div class="easy">
+        <form ngNoForm method="POST" action="https://sbcheckout.payfort.com/FortAPI/paymentPage">
+            <input type="hidden" name="access_code" value="PPDq3t8RTynTM0dfWURk" />
+            <input type="hidden" name="amount" value="{{payfort.vals.amount}}" />
+            <input type="hidden" name="command" value="PURCHASE" />
+            <input type="hidden" name="currency" value="{{payfort.vals.currency}}" />
+            <input type="hidden" name="customer_email" value="{{my_email}}" />
+            <input type="hidden" name="language" value="en" />
+
+            <input type="hidden" name="merchant_identifier" value="oGfFqhGJ" />
+            <input type="hidden" name="merchant_reference" value="{{order_id}}" />
+            <input type="hidden" name="return_url" value="{{payfort.vals.return_url}}">
+            <input type="hidden" name="signature" value="{{payfort.signature}}" />
+
+            <div class="easy btn_cls" style="text-align:center">
+
+
+                <button *ngIf="selectedLang!=1" type="submit" class="btn btn-fill-out btn-block"
+                     id="submit">Pay with Credit Card</button>
+                    <button *ngIf="selectedLang==1" type="submit" class="btn btn-fill-out btn-block"
+                    name="submit" id="submit">دفع مع بطاقة الائتمان</button>
+            </div>
+        </form>
+    </div>
+</span>

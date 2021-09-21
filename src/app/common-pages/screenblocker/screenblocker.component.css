@@ -1,0 +1,15 @@
+.scree_blocker{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #000000c9;
+}
+.scree_blocker img{
+    width: 100px;
+}

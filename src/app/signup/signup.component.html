@@ -1,0 +1,222 @@
+
+
+<!-- START MAIN CONTENT -->
+<div class="main_content">
+
+<!-- START LOGIN SECTION -->
+<div class="login_register_wrap section">
+    <div class="container bg-login">
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-md-10">
+                <div class="login_wrap">
+            		<div class="padding_eight_all bg-white">
+                        <div class="heading_s1">
+                            <h3 *ngIf="selectedLang!=1">Create an Account</h3>
+                            <h3 *ngIf="selectedLang==1">انشئ حساب</h3>
+                        </div>
+                        <form #signupform="ngForm" (ngSubmit)="onSubmit(signupform);" class="width100p flt_left">
+                          <div class="form-group">
+                            <!-- <label>First Name:
+                              <sup>*</sup>
+                            </label> -->
+                            <input placeholder="{{selectedLang!=1?'Enter your First Name':'أدخل اسمك الأول'}}" minlength="3" autocomplete="off" maxlength="255" required class="form-control"
+                              [(ngModel)]="signup.firstname" type="text" name="firstname" id="firstname" #fname="ngModel">
+                            <small *ngIf="fname.invalid && (fname.dirty || fname.touched)" class="b_alert b_alert_danger">
+              
+                              <div *ngIf="fname.errors.required">
+                                <span *ngIf="selectedLang!=1">Name is required.</span>
+                                <span *ngIf="selectedLang==1">مطلوب اسم.</span>
+                              </div>
+              
+                              <div *ngIf="fname.errors.minlength">
+                                <span *ngIf="selectedLang!=1">First Name must be at least 3 characters long.</span>
+                                <span *ngIf="selectedLang==1">يجب ألا يقل طول الاسم الأول عن 3 أحرف.</span>
+                              </div>
+                              <div *ngIf="fname.errors.maxlength">
+                                <span *ngIf="selectedLang!=1">First Name must be maximum 255 characters long.</span>
+                                <span *ngIf="selectedLang==1">يجب ألا يزيد طول الاسم الأول عن 255 حرفًا.</span>
+                              </div>
+              
+              
+                            </small>
+                          </div>
+                          <div class="form-group">
+                            <!-- <label>Last Name:
+                              <sup>*</sup>
+                            </label> -->
+                            <input placeholder="{{selectedLang!=1?'Enter your Last Name':'أدخل اسمك الأخير'}}" minlength="2" autocomplete="off" maxlength="255" required class="form-control"
+                              [(ngModel)]="signup.lastname" type="text" name="lastname" id="lastname" #lname="ngModel">
+                            <small *ngIf="lname.invalid && (lname.dirty || lname.touched)" class="b_alert b_alert_danger">
+              
+                              <div *ngIf="lname.errors.required">
+                                <span *ngIf="selectedLang!=1">Last Name is required.</span>
+                                <span *ngIf="selectedLang==1">إسم العائلة مطلوب.</span>
+                              </div>
+              
+                              <div *ngIf="lname.errors.minlength">
+                                <span *ngIf="selectedLang!=1">Last Name must be at least 2 characters long.</span>
+                                <span *ngIf="selectedLang==1">يجب ألا يقل طول اسم العائلة عن حرفين.</span>
+                              </div>
+                              <div *ngIf="lname.errors.maxlength">
+                                <span *ngIf="selectedLang!=1">Last Name must be maximum 255 characters long.</span>
+                                <span *ngIf="selectedLang==1">يجب ألا يزيد طول اسم العائلة عن 255 حرفًا.</span>
+                              </div>
+                            </small>
+                          </div>
+                          <!--email-->
+                          <div class="form-group">
+                            <!-- <label>Email Address:
+                              <sup>*</sup>
+                            </label> -->
+                            <input placeholder="{{selectedLang!=1?'Enter your Email Address':'أدخل عنوان بريدك الالكتروني'}}" minlength="7" autocomplete="off" maxlength="255" required class="form-control"
+                              [(ngModel)]="signup.email" type="email" name="email" id="email" [email]="true" #email="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+                            <small  *ngIf="email.invalid && (email.dirty || email.touched)" class="b_alert b_alert_danger">
+              
+                              <div *ngIf="email.errors.required">
+                                <span *ngIf="selectedLang!=1">Email Address is required.</span>
+                                <span *ngIf="selectedLang==1">عنوان البريد الإلكتروني مطلوب.</span>
+                              </div>
+              
+                              <div *ngIf="email.errors.minlength">
+                                <span *ngIf="selectedLang!=1">Email Address must be at least 7 characters long.</span>
+                                <span *ngIf="selectedLang==1">يجب أن يكون عنوان البريد الإلكتروني 7 أحرف على الأقل.</span>
+                              </div>
+                              <div *ngIf="email.errors.maxlength">
+                                <span *ngIf="selectedLang!=1">Email Address must be maximum 255 characters long.</span>
+                                <span *ngIf="selectedLang==1">يجب أن يكون الحد الأقصى لعنوان البريد الإلكتروني 255 حرفاً.</span>
+                              </div>
+              
+                              <div *ngIf="email.errors.pattern && !email.errors.minlength ">
+                                <span *ngIf="selectedLang!=1">Email must be valid.</span>
+                                <span *ngIf="selectedLang==1">يجب ان يكون البريد الاكتروني صحيح.</span>
+                              </div>
+              
+              
+                            </small>
+                          </div>
+                          <div class="form-group">
+                            <!-- <label>Password:
+                              <sup>*</sup>
+                            </label> -->
+                            <input placeholder="{{selectedLang!=1?'Enter 6 Digit Long Password':'أدخل كلمة مرور طويلة مكونة من 6 أرقام'}}" minlength="6" maxlength="255" type="password" required class="form-control" [(ngModel)]="signup.password"
+                              name="password" id="password" #pss="ngModel">
+                            <small *ngIf="pss.invalid && (pss.dirty || pss.touched)" class="b_alert b_alert_danger">
+              
+                              <div *ngIf="pss.errors.required">
+                                <span *ngIf="selectedLang!=1">Password is required.</span>
+                                <span *ngIf="selectedLang==1">كلمة المرور مطلوبة.</span>
+                              </div>
+                              <div *ngIf="pss.errors.minlength">
+                                <span *ngIf="selectedLang!=1">Password must be at least 6 characters long.</span>
+                                <span *ngIf="selectedLang==1">الرقم السري يجب الا يقل عن 6 احرف على الاقل.</span>
+                              </div>
+                              <div *ngIf="pss.errors.maxlength">
+                                <span *ngIf="selectedLang!=1">Password must be maximum 255 characters long.</span>
+                                <span *ngIf="selectedLang==1">يجب ألا يزيد عدد أحرف كلمة المرور عن 255 حرفًا.</span>
+                              </div>
+                            </small>
+                          </div>
+
+                          <div class="form-group row" style="clear: both;">
+                            <div class="col-md-5">
+                                <select name="code_country" required class="form-control" [(ngModel)]="signup.code_country"
+                                name="code_country" id="code_country" #pss="ngModel" style="font-size: 12px;
+                                padding: 5px;">
+                                          <option 
+                                          *ngFor="let vals of code_picker; let vdd=index;"
+                                          [value]="vals.phonecode"
+                                          
+                                          >
+                                            {{vals.name}}  (+ {{vals.phonecode}})
+                                          </option>
+                                  </select>
+                            </div>
+
+                            <div class="col-md-7" style="padding-left: 0;">
+                                <input placeholder="{{selectedLang!=1?'Enter Phone Number':'أدخل رقم الهاتف
+                                '}}" type="number" required class="form-control" [(ngModel)]="signup.phone_number"
+                                name="phone_number" id="phone_number" #phonenum="ngModel">
+                              <small *ngIf="phonenum.invalid && (phonenum.dirty || phonenum.touched)" class="b_alert b_alert_danger">
+                
+                                <div *ngIf="phonenum.errors.required">
+                                  <span *ngIf="selectedLang!=1">Phone Number is required.</span>
+                                  <span *ngIf="selectedLang==1">رقم الهاتف مطلوب</span>
+                                </div>
+                                
+                              </small>
+                            </div>
+                          </div>
+                            <div class="login_footer form-group">
+                                <div class="chek-form">
+                                    <div *ngIf="selectedLang!=1" class="custome-checkbox">
+                                        <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox2" required value="1" [(ngModel)]="signup.terms_conditions" #tetrms="ngModel">
+                                        <label class="form-check-label" for="exampleCheckbox2"><span>I agree to  <a routerLink="/page/terms-and-conditions" class="signupclass">Terms</a> &amp; <a routerLink="/page/privacy-policy" class="signupclass">Policy.</a></span></label>
+
+                                        <small *ngIf="tetrms.invalid && (tetrms.dirty || tetrms.touched)" class="b_alert b_alert_danger" style="    text-align: left;
+                                        justify-content: end;
+                                        display: flex;">
+                
+                                          <div *ngIf="tetrms.errors.required">
+                                            <span *ngIf="selectedLang!=1">You must check Terms & conditions.</span>
+                                            <span *ngIf="selectedLang==1">يجب عليك التحقق من الشروط والأحكام.</span>
+                                          </div>
+                                          
+                                        </small>
+                                    </div>
+                                    
+                                    
+                                    <div *ngIf="selectedLang==1" class="custome-checkbox">
+                                        <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox2" required value="1" [(ngModel)]="signup.terms_conditions" #tetrms="ngModel">
+                                        <label class="form-check-label" for="exampleCheckbox2"><span>أوافق على <a routerLink="/page/terms-and-conditions" class="signupclass">الشروط والأحكام</a>. <a routerLink="/page/privacy-policy" class="signupclass">سياسات</a>.</span></label>
+
+                                        <small *ngIf="tetrms.invalid && (tetrms.dirty || tetrms.touched)" class="b_alert b_alert_danger" style="    text-align: left;
+                                        justify-content: end;
+                                        display: flex;">
+                
+                                          <div *ngIf="tetrms.errors.required">
+                                            <span *ngIf="selectedLang!=1">You must check Terms & conditions.</span>
+                                            <span *ngIf="selectedLang==1">يجب عليك التحقق من الشروط والأحكام.</span>
+                                          </div>
+                                          
+                                        </small>
+
+                                  </div>
+                                </div>
+                            </div>
+                            <div *ngIf="selectedLang!=1" class="form-group">
+                                <button [disabled]="!signupform.form.valid" [class.mousenotallowed]="!signupform.form.valid" type="submit" class="btn btn-fill-out btn-block"
+                                name="submit" id="submit">Signup</button>
+                            </div>
+                            <div *ngIf="selectedLang==1" class="form-group">
+                              <button [disabled]="!signupform.form.valid" [class.mousenotallowed]="!signupform.form.valid" type="submit" class="btn btn-fill-out btn-block"
+                              name="submit" id="submit">سجل</button>
+                          </div>
+                        </form>
+                         <div class="different_login">
+                            <span *ngIf="selectedLang!=1"> or</span>
+                            <span *ngIf="selectedLang==1"> أو</span>
+                        </div>
+                        <ul class="btn-login list_none text-center">
+                            <li *ngIf="selectedLang!=1"><a (click)="signInWithFB()" class="btn btn-facebook"><i class="ion-social-facebook"></i>Facebook</a></li>
+                            <li *ngIf="selectedLang==1"><a (click)="signInWithFB()" class="btn btn-facebook"><i class="ion-social-facebook"></i>الفيسبوك</a></li>
+                            <li *ngIf="selectedLang!=1"><a (click)="signInWithGoogle()" class="btn btn-google"><i class="ion-social-googleplus"></i>Google</a></li>
+                            <li *ngIf="selectedLang==1"><a (click)="signInWithGoogle()" class="btn btn-google"><i class="ion-social-googleplus"></i>جوجل</a></li>
+                        </ul>  
+                        <div *ngIf="selectedLang!=1" class="form-note text-center">Already have an account? 
+                          
+                          <a routerLink="/login" routerLinkActive="active" class="signupclass"> Login</a>
+                        </div>
+                        <div *ngIf="selectedLang==1" class="form-note text-center">هل لديك حساب؟ 
+                          
+                          <a routerLink="/login" routerLinkActive="active" class="signupclass"> تسجيل الدخول</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END LOGIN SECTION -->
+
+</div>
+<!-- END MAIN CONTENT -->

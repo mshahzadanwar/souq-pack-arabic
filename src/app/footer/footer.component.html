@@ -1,0 +1,194 @@
+
+<!-- START FOOTER -->
+<footer class="bg_gray" *ngIf="!hide_footer">
+    <div class="middle_footer">
+    	<div class="custom-container d-flex justify-content-center">
+        	<div class="row width83p bg-tr">
+            	<div class="col-12">
+                	<div class="shopping_info">
+                        <div class="row justify-content-center">
+                            <div class="col-md-4">	
+                                <div class="icon_box icon_box_style2">
+                                    <div class="icon">
+                                        <i class="flaticon-shipped"></i>
+                                    </div>
+                                    <div class="icon_box_content">
+                                    	<h5 >{{footers[0].title}}</h5>
+                            
+                                        <p>{{footers[0].body}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">	
+                                <div class="icon_box icon_box_style2">
+                                    <div class="icon">
+                                        <i class="flaticon-money-back"></i>
+                                    </div>
+                                    <div class="icon_box_content">
+                                    	<h5 >{{footers[1].title}}</h5>
+                            
+                                        <p>{{footers[1].body}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">	
+                                <div class="icon_box icon_box_style2">
+                                    <div class="icon">
+                                        <i class="flaticon-support"></i>
+                                    </div>
+                                    <div class="icon_box_content">
+                                    	<h5 >{{footers[2].title}}</h5>
+                            
+                                        <p>{{footers[2].body}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<div class="footer_top small_pt pb_20">
+        <div class="custom-container d-flex justify-content-center ">
+            <div class="row width83p bg-tr">
+                <div class="col-lg-5 col-md-12 col-sm-12">
+                	<div class="widget">
+                        <div class="footer_logo">
+                            <!-- <a href="#"><img src="../../assets/images/icon.png" style="height: 60px;" alt="logo"/></a> -->
+                        </div>
+                        <p class="mb-3" *ngIf="selectedLang!=1">{{imp.footer_about}}</p>
+                        <p class="mb-3" *ngIf="selectedLang==1">{{imp.footer_about_ar}}</p>
+                        <ul class="contact_info">
+                            <li>
+                                <i class="ti-location-pin"></i>
+                                <p>{{butAll.address}}</p>
+                            </li>
+                            <li>
+                                <i class="ti-email"></i>
+                                <a href="mailto:{{butAll.email}}">{{butAll.email}}</a>
+                            </li>
+                            <li>
+                                <i class="ti-mobile"></i>
+                                <p style="direction: ltr">{{butAll.phone}}</p>
+                            </li>
+                        </ul>
+                    </div>
+        		</div>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                	<div class="widget">
+                        <h6 class="widget_title" *ngIf="selectedLang!=1">Useful Links</h6>
+                        <h6 class="widget_title" *ngIf="selectedLang==1">روابط مفيدة</h6>
+                        <ul class="widget_links">
+                            <li *ngIf="selectedLang!=1"><a routerLink="page/about-us">About Us</a></li>
+                            <li *ngIf="selectedLang==1"><a routerLink="page/about-us">من نحن</a></li>
+                            <li *ngIf="selectedLang!=1"><a routerLink="/profile">My Account</a></li>
+                            <li *ngIf="selectedLang==1"><a routerLink="/profile">حسابي</a></li>
+                           
+                            <li *ngIf="selectedLang!=1"><a routerLink="contact-us">Contact</a></li>
+                            <li *ngIf="selectedLang==1"><a routerLink="contact-us">اتصل بنا</a></li>
+
+                            <li *ngIf="selectedLang!=1"><a routerLink="page/faq">FAQ</a></li>
+                            <li *ngIf="selectedLang==1"><a routerLink="page/faq">أسئلة متكررة</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                	<div class="widget">
+                        <h6 *ngIf="selectedLang!=1" class="widget_title">Terms and Conditions</h6>
+                        <h6 *ngIf="selectedLang==1" class="widget_title">الشروط والأحكام</h6>
+                        <ul class="widget_links">
+                            
+                            <li *ngIf="selectedLang!=1"><a routerLink="page/return-policy">Return Policy</a></li>
+                            <li *ngIf="selectedLang==1"><a routerLink="page/return-policy">سياسة الاسترجاع</a></li>
+                            <li *ngIf="selectedLang!=1"><a routerLink="page/privacy-policy">Privacy Policy</a></li>
+                            <li *ngIf="selectedLang==1"><a routerLink="page/privacy-policy">سياسة الخصوصية</a></li>
+                            <li *ngIf="selectedLang!=1"><a routerLink="page/terms-and-conditions">Terms of Use</a></li>
+                            <li *ngIf="selectedLang==1"><a routerLink="page/terms-and-conditions">شروط الاستخدام</a></li>
+
+
+                            <li *ngIf="selectedLang!=1 && !logged_in"><a routerLink="login">Login</a></li>
+                            <li *ngIf="selectedLang==1 && !logged_in"><a routerLink="login">تسجيل الدخول</a></li>
+
+
+                            <li *ngIf="selectedLang!=1 && !logged_in"><a routerLink="signup">Signup</a></li>
+                            <li *ngIf="selectedLang==1 && !logged_in"><a routerLink="signup">سجل</a></li>
+                            
+                        </ul>
+                    </div>
+                </div>
+                <!-- <div class="col-lg-4 col-md-4 col-sm-12">
+                	<div class="widget">
+                        <h6 class="widget_title">Instagram</h6>
+                      <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script><iframe src="//lightwidget.com/widgets/7063bf951a855264af90bced83f0573a.html" scrolling="no" allowtransparency="true" class="lightwidget-widget" style="width:100%;height:180px;border:0;overflow:hidden;"></iframe>
+
+                    </div>
+                </div> -->
+            </div>
+        </div>
+
+        <div class="custom-container d-flex justify-content-center">
+            <div class="row width83p bg-tr">
+                <div class="col-lg-5 col-md-12 col-sm-12">
+                	<div class="widget">
+                      
+                        <h6 *ngIf="selectedLang!=1" class="widget_title">Download SouqPack App</h6>
+                        <h6 *ngIf="selectedLang==1" class="widget_title">تنزيل تطبيق SouqPack
+                        </h6>
+                        <div class=" d-flex justify-content-space-between download_app  align-items-center">
+                            <a href="">
+                                <img src="./../../assets/images/badge-download-on-the-app-store.svg" />
+                            </a>
+                            <a href="">
+
+                                <img *ngIf="selectedLang!=1"  class="m-l-5 ht-38" src="./../../assets/images/google-play-badge.png" />
+                                <img *ngIf="selectedLang==1" class="m-r-5  ht-38" src="./../../assets/images/google-play-badge-ar.png" />
+                            </a>
+                        </div>
+                    </div>
+        		</div>
+                
+                
+            </div>
+            
+        </div>
+    </div>
+   
+    <div class="bottom_footer border-top-tran">
+        <div class="custom-container d-flex justify-content-center">
+            <div class="row width83p bg-tr">
+                <div class="col-lg-4">
+                    <p class="mb-lg-0 text-center">{{copy}}</p>
+                    <!-- <p *ngIf="selectedLang!=1" class="mb-lg-0 text-center">Developed By: <a href="https://www.dedevelopers.com/">DeDevelopers</a></p>
+                    <p *ngIf="selectedLang==1" class="mb-lg-0 text-center">طورت بواسطة: <a href="https://www.dedevelopers.com/">DeDevelopers</a></p> -->
+                </div>
+                <div class="col-lg-4 order-lg-first">
+                    <div class="widget mb-lg-0">
+                        <ul class="social_icons text-center text-lg-left">
+                            <li><a target="_blank" href="{{this.imp.facebook}}" ><img src="./../../assets/images/fb.png" style="width: 50px;" /></a></li>
+                            <li><a target="_blank" href="{{this.imp.twitter}}" class=""><img src="./../../assets/images/tw.png" style="width: 50px;" /></a></li>
+                            <li><a target="_blank" href="{{this.imp.youtube}}" class=""><img src="./../../assets/images/yt.png" style="width: 50px;" /></a></li>
+                            <li><a target="_blank" href="{{this.imp.instagram}}" class=""><img src="./../../assets/images/in.png" style="width: 50px;" /></a></li>
+                            <li><a target="_blank" href="{{this.imp.snapchat}}" class=""><img src="./../../assets//images/sc.png" style="width: 50px;" /></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <ul class="footer_payment text-center text-lg-right">
+                            <li style="margin-right: 3px;margin-left: 3px;"><a href="#"><img src="../../assets/images/mada.png" alt="MADA"></a></li>
+                        <li><a href="#"><img src="../../assets/images/visa.png" alt="visa"></a></li>
+                        <li><a href="#"><img src="../../assets/images/master_card.png" alt="master_card"></a></li>
+                        <li><a href="#"><img src="../../assets/images/amarican_express.png" alt="amarican_express"></a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- END FOOTER -->
+
+<a  *ngIf="!hide_footer" href="#" class="scrollup" style="display: none;"><i class="ion-ios-arrow-up"></i></a> 
+

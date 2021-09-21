@@ -1,0 +1,7 @@
+.b_alert_danger {
+	color: #f00000;
+	margin-top: 5px; 
+	font-size: 12px;
+	text-align: right;
+    float: right;
+}

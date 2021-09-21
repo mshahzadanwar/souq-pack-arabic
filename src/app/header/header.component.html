@@ -1,0 +1,329 @@
+<!-- End Screen Load Popup Section --> 
+
+<!-- START HEADER -->
+<header class="header_wrap">
+<div class="top-header light_skin bg_dark d-none d-md-block">
+<div class="custom-container d-flex justify-content-center  ">
+<div class="row align-items-center width83p bg-tr " style="padding:0;">
+    <!-- <div class="col-lg-6 col-md-8">
+        <div class="header_topbar_info">
+            
+            <div class="download_wrap">
+                <span class="mr-3" *ngIf="selectedLang!=1">Download App</span>
+                <span class="mr-3" *ngIf="selectedLang==1">تحميل التطبيق</span>
+                <ul class="icon_list text-center text-lg-left">
+                    <li><a href="#"><i class="fab fa-apple"></i></a></li>
+                    <li><a href="#"><i class="fab fa-android"></i></a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div> -->
+    <div class="col-lg-12 col-md-12">
+        <div class="d-flex align-items-center ultra_lang_selector" style="float: left;">
+
+            <li class="dropdown list_style_none">
+                <a class=" nav-link" href="#" data-toggle="dropdown" style="padding: 0px;">
+            <div class="easy super_lang_selector">
+                <div *ngIf="selectedLang==2" class="showing_lang">
+                    <img class="header_lang_flag2" src="../../assets/images/en.png" /> <span>English</span>
+                </div>
+                <div *ngIf="selectedLang==1" class="showing_lang">
+                    <img class="header_lang_flag2" src="../../assets/images/ar.jpg" /> <span>عربى</span>
+                </div>
+                <span  class=" m-r-0-i" [class.little_margin_left_please]="selectedLang==1" >/</span>
+                <span class="little_margin_left_please">{{selectedRegionText}}</span>
+                
+            </div>
+            <!-- Dev. by munkgorn -->
+            <!-- Use This! #just fix width+height IMG  -->
+            
+            <!-- End This -->
+            </a>
+            <div class="dropdown-menu">
+                <div style="padding:20px;" class="">
+                    <div class="" >
+                        <div class="lng_dropdown easy" >
+                
+                            <span *ngIf="selectedLang!=1" style="float: left;width: 100%;margin-bottom: 6px;color: #222; font-size: 14px;">Language</span>
+                            <span *ngIf="selectedLang==1" style="float: left;width: 100%;margin-bottom: 6px;color: #222; font-size: 14px;">اللغات</span>
+                            <div class="easy">
+
+                                <div class="mm-dropdown">
+                                    <div *ngIf="selectedLang!=1" class="textfirst"> <span class="span_to_sv" style="display:flex;align-items:center;"> <img src="./../../assets/images/en.svg" alt="" width="30"  /> English</span> <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-arrow-down-b-128.png" width="10" height="10" class="down" /></div>
+                                    <div *ngIf="selectedLang==1" class="textfirst"> <span class="span_to_sv" style="display:flex;align-items:center;"> <img src="./../../assets/images/ar.jpg" alt="" width="30"  /> عربى</span> <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-arrow-down-b-128.png" width="10" height="10" class="down" /></div>
+                                    <ul>
+                                    <li (click)="langChange(2)" data-selected="1" class="input-option" data-value="1">
+                                        <span class="span_to_sv" style="display:flex;align-items:center;"><img src="./../../assets/images/en.svg" alt="" width="30" /> English</span>
+                                    </li>
+                                    <li (click)="langChange(1)" data-selected="1" class="input-option" data-value="1">
+                                        <span class="span_to_sv" style="display:flex;align-items:center;"><img src="./../../assets/images/ar.jpg" alt="" width="30" /> عربى</span>
+                                    </li>
+                                    
+                                    </ul>
+                                </div>
+                            </div>
+
+                            
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="lng_dropdown easy" style="padding-top: 0px;">
+                
+                            <span *ngIf="selectedLang!=1" style="float: left;width: 100%;margin-bottom: 6px;color: #222; font-size: 14px; margin-top: 18px;">Region</span>
+                            <span *ngIf="selectedLang==1" style="float: left;width: 100%;margin-bottom: 6px;color: #222; font-size: 14px; margin-top: 18px;">البلد</span>
+                            
+                                <select style="    border: 1px solid #ddd;
+                                padding: 3px 10px;" (change)="onChange($event.target.value)" class="custome_selectt easy" style="font-size: 13px;padding: 5px; border:1px solid #ccc;">
+                                <option *ngFor="let region of regions; let r_ind=index;" [value]='region.id' [selected]="region.id==selectedRegion" data-title="USD">{{region.value}}</option>
+                                
+                            </select>
+                            <!-- <div class="easy">
+                                <div class="mm-dropdown">
+                                    <div class="textfirst"> <span class="span_to_sv" style="display:flex;align-items:center;"> {{selectedRegionText}}</span> <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-arrow-down-b-128.png" width="10" height="10" class="down" /></div>
+                                    <ul>
+                                    <li 
+                                    *ngFor="let region of regions; let r_ind=index;"
+                                    
+                                    class="input-option" data-value="1">
+                                        <span class="span_to_sv" style="display:flex;align-items:center;">{{region.value}}</span>
+                                    </li>
+                                    
+                                    </ul>
+                                </div>
+                            </div> -->
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </li>
+
+            
+            <!-- <div class="lng_dropdown">
+                
+
+                <span class="header_lang_flag" [class.active]="selectedLang==2" (click)="langChange(2)">
+                    <img src="../../assets/images/en.png" />
+                </span>
+                <span class="header_lang_flag" [class.active]="selectedLang==1" (click)="langChange(1)">
+                    <img src="../../assets/images/ar.jpg" />
+                </span>
+
+                
+            </div>
+            <div class="ml-3">
+                <select (change)="onChange($event.target.value)" class="custome_selectt">
+                    <option *ngFor="let region of regions; let r_ind=index;" [value]='region.id' [selected]="region.id==selectedRegion" data-title="USD">{{region.value}}</option>
+                    
+                </select>
+            </div> -->
+        </div>
+        <div style="float: right;
+        color: #fff;" *ngIf="user_firstname">
+                <span *ngIf="selectedLang!=1">Welcome</span>
+                <span *ngIf="selectedLang==1">أهلا </span>
+                 {{user_firstname}} {{user_lastname}}
+         </div>
+    </div>
+</div>
+</div>
+</div>
+<div class="middle-header dark_skin">
+<div class="custom-container d-flex justify-content-center bg-ff">
+<div class="nav_block width83p">
+    <a *ngIf="logo=='def'" class="navbar-brand logo_with_flex"  routerLink="/">
+        <img class="logo_light" src="https://admin.souqpack.com/resources/uploads/logo/dfea7b610b2b320e176ce648ee7f13fb.png" alt="logo" style="height: 46px;" />
+        <img class="logo_dark" src="https://admin.souqpack.com/resources/uploads/logo/dfea7b610b2b320e176ce648ee7f13fb.png" alt="logo" style="height: 46px;" />
+    </a>
+    <a *ngIf="logo!='def'" class="navbar-brand logo_with_flex"  routerLink="/">
+        <img class="logo_light" src="{{logo}}" alt="logo" style="height: 46px;" />
+        <img class="logo_dark" src="{{logo}}" alt="logo" style="height: 46px;" />
+    </a>
+    <div class="product_search_form rounded_input search_with_flex">
+        <form #searchform="ngForm" (ngSubmit)="onSubmit(searchform);" class="width100p flt_left">
+            <div class="input-group">
+                
+                <input 
+
+                name="search"
+                id="search"
+                [(ngModel)]="search.search"
+                class="form-control" placeholder="{{selectedLang!=1?'Search Product...':'بحث عن منتج ...'}}" required=""  type="text">
+                <button type="submit" [class.search_btn2]="selectedLang==2" [class.search_btn3]="selectedLang==1" ><i class="fa fa-search"></i></button>
+            </div>
+        </form>
+    </div>
+    <ul class="navbar-nav attr-nav align-items-center cart_with_flex">
+        <li>
+            
+            <a routerLink="/profile" class="nav-link"><i class="linearicons-user"></i></a></li>
+        <li><a routerLink="/wishlist" class="nav-link"><i class="linearicons-heart"></i>
+            <!-- <span class="wishlist_count">0</span> -->
+        </a></li>
+        <li class="dropdown cart_dropdown"><a class="nav-link cart_trigger" data-toggle="dropdown"><i class="linearicons-bag2"></i><span *ngIf="cart_items!=null" class="cart_count">{{cart_items.length}}</span><span class="amount"><span class="currency_symbol">{{currency}}</span>{{total}}</span></a>
+            <div class="cart_box cart_right dropdown-menu dropdown-menu-right">
+                <ul class="cart_list">
+                    <li *ngFor="let item of cart_items; let ind=index;">
+                        <a (click)="removeItem(ind)" class="item_remove"><i class="ion-close"></i></a>
+                        <a routerLink="/product/{{item.slug}}"><img src="{{php_url+'resources/uploads/products/'+item.img}}" alt="cart_thumb1">{{item.title}}</a>
+                        <a style="font-size: 11px;" *ngFor="let variss of item.custom_variation;  let ind = index;">
+                               <br> {{variss | json}}
+                             </a>
+                        <span *ngIf="selectedLang!=1" class="cart_quantity" style="width: 100%;"> Qty. {{item.qty}} <span class="cart_amount"  style="margin-left: 10px; float: right;"> Price {{fix2(item.price)}}</span> </span>
+                        <span *ngIf="selectedLang==1" class="cart_quantity" style="width: 100%;" > الكمية. {{item.qty}} <span class="cart_amount" style="margin-right: 10px; float: left;"> السعر {{fix2(item.price)}}</span> </span>
+                        <span *ngIf="selectedLang!=1" class="cart_quantity">Total {{fix2(item.qty*item.price)}}<span class="price_symbole"> {{currency}}</span></span>
+                        <span *ngIf="selectedLang==1" class="cart_quantity">مجموع <span class="price_symbole"> {{currency}}</span> {{fix2(item.qty*item.price)}}</span>
+                    </li>
+                    <!-- <li>
+                        <a href="#" class="item_remove"><i class="ion-close"></i></a>
+                        <a href="#"><img src="../../assets/images/cart_thamb2.jpg" alt="cart_thumb2">Ornare sed consequat</a>
+                        <span class="cart_quantity"> 1 x <span class="cart_amount"> <span class="price_symbole">$</span></span>81.00</span>
+                    </li> -->
+                </ul>
+                <div *ngIf="cart_items==null || cart_items.length==0" class="cart_footer" style="padding:20px">
+                    <span *ngIf="selectedLang!=1">Cart is empty</span>
+                    <span *ngIf="selectedLang==1">العربة فارغة</span>
+                </div>
+                <div *ngIf="cart_items!=null && cart_items.length>0" class="cart_footer">
+                    <p *ngIf="selectedLang!=1" class="cart_total"><strong>Subtotal:</strong> <span class="cart_price"></span>{{total}} <span class="price_symbole">{{currency}}</span></p>
+                    <p *ngIf="selectedLang==1" class="cart_total"><strong>الاجمالي:</strong> <span class="cart_price"></span>{{total}} <span class="price_symbole">{{currency}}</span></p>
+                    <p *ngIf="selectedLang!=1" class="cart_buttons"><a routerLink="/cart" class="btn btn-fill-line view-cart">View Cart</a><a routerLink="/checkout" class="btn btn-fill-out checkout">Checkout</a></p>
+                    <p *ngIf="selectedLang==1" class="cart_buttons"><a routerLink="/cart" class="btn btn-fill-line view-cart">عرض العربة</a><a routerLink="/checkout" class="btn btn-fill-out checkout">اتمام الشراء</a></p>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+</div>
+</div>
+<div class="bottom_header dark_skin main_menu_uppercase border-top p-r-p ">
+<div class="custom-container d-flex justify-content-center">
+<div class="row width83p pb-0 pt-0"> 
+    <!-- <div class="col-lg-3 col-md-4 col-sm-6 col-3" id="ignore_click">
+        <div class="categories_wrap">
+            <button #toggleButton type="button" (click)="toggleNav()" class="categories_btn">
+                <i class="linearicons-menu"></i>
+                <span *ngIf="selectedLang!=1">All Categories </span>
+                <span *ngIf="selectedLang==1">جميع الفئات </span>
+            </button>
+            <div #navCatContent id="navCatContent" class="nav_cat navbar " [class.display_gone]="nav_hidden" >
+                <ul> 
+                    <li *ngFor="let cat of cats; let i=index;" class="dropdown dropdown-mega-menu">
+                        <a *ngIf="cat.subs.length>0" class="dropdown-item nav-link dropdown-toggler" href="#" data-toggle="dropdown"><img [attr.src]="php_url + 'resources/uploads/categories/'+cat.image" style="width:20px;height: 20px;margin-right: 15px;" /> <span>{{cat.title}}</span></a>
+                        <a *ngIf="cat.subs.length==0" class="dropdown-item nav-link" routerLink="/category/{{cat.slug}}"><img [attr.src]="php_url + 'resources/uploads/categories/'+cat.image" style="width:20px;height: 20px;margin-right: 15px;" /> <span>{{cat.title}}</span></a>
+                        <div *ngIf="cat.subs.length>0" class="dropdown-menu ">
+
+                            
+                                <ul class="mega-menu d-lg-flex">
+                                    <li class="mega-menu-col col-lg-12">
+                                        <ul class="d-lg-flex">
+                                            <li class="mega-menu-col col-lg-12">
+                                                <ul> 
+                                                    <div  *ngFor="let sub of cat.subs; let in = index;" class="col-lg-4" style="float: left;">
+                                                        <li ><a class="dropdown-item nav-link nav_item" routerLink="/category/{{sub.slug}}">{{sub.title}}</a></li>
+                                                    </div>
+                                                </ul>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+                    </li>
+                </ul>
+                <div class="more_categories" *ngIf="selectedLang!=1">More Categories</div>
+                <div class="more_categories" *ngIf="selectedLang==1">المزيد من الفئات</div>
+            </div>
+            
+        </div>
+    </div> -->
+    <!-- <div class="col-lg-1 col-md-1 col-sm-12 col-12"></div> -->
+    <div class="col-lg-12 col-md-12 col-sm-12 col-12 not_relative_on_pc">
+        <nav class="navbar navbar-expand-lg not_relative_on_pc" >
+            <form #searchform2="ngForm" (ngSubmit)="onSubmit(searchform2);"  class="width100p flt_left" [class.ar_search_form]="selectedLang==1">
+            <div  [class.pr_search_icon]="selectedLang!=1"  [class.pr_search_iconr]="selectedLang==1">
+                <input 
+                name="search"
+                id="search"
+                [(ngModel)]="search.search"
+                placeholder="{{selectedLang!=1?'Search Product...':'بحث عن منتج ...'}}" required=""  type="text" />
+                <button href="javascript:void(0);" class="nav-link pr_search_trigger"><i class="linearicons-magnifier"></i></button>
+            </div>
+            </form> 
+            <button [class.m-r-0-i-phone]="selectedLang==1" class="navbar-toggler side_navbar_toggler" type="button" data-toggle="collapse" data-target="#navbarSidetoggle" aria-expanded="false"> 
+                <span class="ion-android-menu"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse mobile_side_menu" id="navbarSidetoggle" style="justify-content: space-between">
+                <ul class="navbar-nav">
+
+
+                    <!-- <li>
+                        <a *ngIf="selectedLang!=1" class="nav-link nav_item p-l-0" routerLink="/">Home</a>
+                        <a *ngIf="selectedLang==1" class="nav-link nav_item p-l-0" routerLink="/">الصفحة الرئيسية</a>
+                            routerLink="/category/{{sub.slug}}"
+                        </li> -->
+
+
+                        <li *ngFor="let cat of cats; let i=index;" class="dropdown" [class.bold_font_menu]="selectedLang==1">
+                        <a *ngIf="cat.subs.length>0" class="dropdown-item nav-link" href="#" data-toggle="dropdown">
+                            <img  width="20" height="20" [class.m-l-5]="selectedLang==1" [class.m-r-5]="selectedLang!=1"  style="margin-right: 5px;" src="{{php_url+'resources/uploads/categories/'+cat.image}}" />
+                            <span>{{cat.title}}</span></a>
+                        <a *ngIf="cat.subs.length==0" class="dropdown-item nav-link" routerLink="/category/{{cat.slug}}">
+                            <img  width="20" height="20" [class.m-l-5]="selectedLang==1" [class.m-r-5]="selectedLang!=1"  src="{{php_url+'resources/uploads/categories/'+cat.image}}" /><span>{{cat.title}}</span>
+                        </a>
+                        <div *ngIf="cat.subs.length>0  && allowed_opening" id="dro_men" class="dropdown-menu " [class.width800]="cat.subs.length>2" [class.width600]="cat.subs.length>1">
+                            <div class="header_dropdown_container" [class.flt-left]="selectedLang!=1" [class.flt-right]="selectedLang==1">
+                            <div  *ngFor="let sub of cat.subs; let in = index;" style="float: left;" style="width: 23%; margin: 0 1%; float: left;border-bottom: 1px dotted #f0f0f0;">
+                                <li ><a class="dropdown-item nav-link nav_item"  (click)="routeCustom(sub.slug)" >{{sub.title}}</a></li>
+                            </div>
+                        </div>
+                        </div>
+                    </li>
+                        
+                    <!--  
+                    <li>
+                        <a *ngIf="selectedLang!=1" class="nav-link nav_item" routerLink="/page/about-us">About Us</a>
+                        <a *ngIf="selectedLang==1" class="nav-link nav_item" routerLink="/page/about-us">معلومات عنا</a>
+                        </li>
+                        <li>
+                        <a *ngIf="selectedLang!=1" class="nav-link nav_item" routerLink="/contact-us">Contact Us</a>
+                        <a *ngIf="selectedLang==1" class="nav-link nav_item" routerLink="/contact-us">اتصل بنا</a>
+                        </li>
+                        
+                    <li class="dropdown">
+                        <a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">Pages</a>
+
+                        <div class="dropdown-menu">
+                            <ul> 
+                                <li><a class="dropdown-item nav-link nav_item" href="about.php">About Us</a></li> 
+                                <li><a class="dropdown-item nav-link nav_item" href="contact.php">Contact Us</a></li> 
+                                <li><a class="dropdown-item nav-link nav_item" href="faq.php">Faq</a></li>
+                                <li><a class="dropdown-item nav-link nav_item" href="404.html">404 Error Page</a></li>
+                                <li><a class="dropdown-item nav-link nav_item" href="login.php">Login</a></li>
+                                <li><a class="dropdown-item nav-link nav_item" href="signup.php">Register</a></li>
+                                <li><a class="dropdown-item nav-link nav_item" href="term-condition.html">Terms and Conditions</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                        -->
+                    
+                </ul>
+                <div>
+                    <a *ngIf="selectedLang !=1" routerLink="/customizer/non-woven-bags-2-15" class="cust_icon"><i class="fa fa-edit"></i> Custom Order </a>
+                    <a *ngIf="selectedLang ==1" routerLink="/customizer/non-woven-bags-2-15" class="cust_icon"><i class="fa fa-edit"></i> اصنع طلبك</a>
+                </div>
+            </div>
+            <!-- <div class="contact_phone contact_support">
+                <i class="linearicons-phone-wave"></i>
+                <span>{{webphone}}</span>
+            </div> -->
+        </nav>
+    </div>
+</div>
+</div>
+</div>
+</header>
+<!-- END HEADER -->

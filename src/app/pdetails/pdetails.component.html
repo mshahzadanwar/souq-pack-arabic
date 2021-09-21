@@ -1,0 +1,351 @@
+<div *ngIf="no_product" class="main_content">
+    <div class="section bg-ff pt-5">
+    <div class="container no_prd">
+        <img src="{{php_url+'resources/no-product-found.jpg'}}" alt="No Product Found!">
+        <div class="no_product_text" *ngIf="selectedLang!=1">
+                Sorry! We could't find your product
+        </div>
+        <div class="no_product_text" *ngIf="selectedLang==1">
+                آسف! لم نتمكن من العثور على منتجك
+        </div>
+    </div>
+    </div>
+</div>
+<div *ngIf="dataLoaded && !no_product" class="main_content">
+
+<!-- START SECTION SHOP -->
+<div class="section bg-ff pt-5">
+	<div class="container">
+		<div class="row ltr">
+            <div class="col-lg-6 col-md-6 mb-4 mb-md-0">
+                <div class="product-image">
+                    <div class="product_img_box">
+
+                        <img *ngIf="product.slider_images.length==0" id="product_img" src='{{mainSrc}}' data-zoom-image="{{mainSrc}}" alt="product_img1" />
+                        <img *ngIf="product.slider_images.length>0" id="product_img" src="{{mainSrc}}" data-zoom-image="{{mainSrc}}" alt="product_img1" />
+                        <a href="javascript:;" class="product_img_zoom" title="Zoom">
+                            <span class="linearicons-zoom-in"></span>
+                        </a>
+                    </div>
+                    <div id="pr_item_gallery" class="product_gallery_item slick_slider" data-slides-to-show="4" data-slides-to-scroll="1" data-infinite="false">
+                        <div *ngFor="let slider of product.slider_images; let ind=index;" class="item">
+                            <a [routerLink]="" (click)="mainSource(slider,ind)" class="product_gallery_item " [class.active]="srcIndex==ind" [attr.data-image]="slider" [attr.data-zoom-image]="slider">
+                                <img src="{{slider}}" alt="product_small_img1" />
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6" [class.rtl]="selectedLang==1">
+                <div class="pr_detail">
+                    <div class="product_description easy">
+                        <h4 class="product_title"><a href="javascript:;">{{product.title}}</a></h4>
+                        
+                        <div *ngIf="product.discount_text!=''" class="product_price">
+                            <span class="price">{{product.discounted_text}}</span>
+                            <del *ngIf="product.real_price_text!=0">{{product.real_price_text}}</del>
+                            <!-- <div class="on_sale" *ngIf="product.discount_text!=0">
+                                <span>{{product.discount_text}} Off</span>
+                            </div> -->
+                            <div class="on_sale" *ngIf="selectedLang!=1" >
+                                <span>{{product.discount_text}} Off</span>
+                            </div>
+                            <div class="on_sale" *ngIf="selectedLang==1" style="direction: ltr;">
+                                <span> {{product.discount_text}} خصم</span>
+                            </div>
+                        </div>
+                        <div *ngIf="product.discount_text==''" class="product_price">
+                            <span class="price">{{product.real_price_text}}</span>
+                        </div>
+                        <!-- <span *ngIf="selectedLang!=1" class="on_sale minimum_qty_style">
+                            Minimum Quantity is {{product.min_order_qty}}
+                        </span>
+                        <span *ngIf="selectedLang==1" class="on_sale minimum_qty_style">
+                            الحد الأدنى للكمية {{product.min_order_qty}}
+                        </span> -->
+                        <!-- <div class="rating_wrap">
+                            <div class="rating">
+                                <div class="product_rate" style="width:80%"></div>
+                            </div>
+                            <span class="rating_num">(21)</span>
+                        </div> -->
+                        <div class="pr_desc">
+                            <!-- <p>{{product.description}}</p> -->
+                        </div>
+                        <!-- <div class="product_sort_info">
+                            <ul>
+                                <li><i class="linearicons-shield-check"></i> 1 Year AL Jazeera Brand Warranty</li>
+                                <li><i class="linearicons-sync"></i> 30 Day Return Policy</li>
+                                <li><i class="linearicons-bag-dollar"></i> Cash on Delivery available</li>
+                            </ul>
+                        </div>
+                        <div class="pr_switch_wrap">
+                            <span class="switch_lable">Color</span>
+                            <div class="product_color_switch">
+                                <span class="active" data-color="#87554B"></span>
+                                <span data-color="#333333"></span>
+                                <span data-color="#DA323F"></span>
+                            </div>
+                        </div>
+                        <div class="pr_switch_wrap">
+                            <span class="switch_lable">Size</span>
+                            <div class="product_size_switch">
+                                <span>xs</span>
+                                <span>s</span>
+                                <span>m</span>
+                                <span>l</span>
+                                <span>xl</span>
+                            </div>
+                        </div> -->
+                    </div>
+                     <!-- [class.variation_active]="option.selected" (click)="selectOption(var_ind,opt_ind)" -->
+                    <div class="cart_extra easy">
+                        <div *ngFor="let variation of product.custom_variations; let var_ind=index;" class="easy">
+                            <div  class="p_var_super easy">
+                                <div class="variation_btn_size variation_active" [class.m-l-10]="selectedLang==1">
+                                    {{variation.title}}
+                                </div>
+                                <div class="variation_options">
+                                    <div *ngFor="let option of variation.options; let opt_ind=index;" [class.variation_active_sub]="option.selected" (click)="selectOption(var_ind,opt_ind)" class="variation_btn variation_btn_no_hover" >
+                                        {{option.title}}
+                                    </div>
+                                </div>
+                                <!-- <div class="variation_btn" >
+                                        {{variation.title}}
+                                    </div>
+                                <div class="variation_options variation_btn variation_btn_no_hover">
+                                    
+                                    <div *ngFor="let option of variation.options; let opt_ind=index;">
+                                        {{option.title}}
+                                    </div>
+                                </div> -->
+                            </div>
+                            <hr class="easy"  />
+
+                        </div>
+                    </div>
+                    <div class="cart_extra easy">
+                        <div class="cart-product-quantity">
+                            <div class="quantity" *ngIf="product.out_of_stock==0">
+                                <input (click)="QtyMinus()"  type="button" value="-" class="minus">
+                                <input [(ngModel)]="new_cart.qty" type="number" name="qty" id="qty" #qty="ngModel" type="text" name="quantity" title="Qty" class="qty" size="4">
+                                <input (click)="QtyPlus()" type="button" value="+" class="plus">
+                            </div>
+                        </div>
+                        <div class="cart_btn" *ngIf="product.out_of_stock==0">
+                            <button *ngIf="selectedLang!=1" (click)="addToCart(product)" class="btn btn-fill-out btn-addtocart" type="button"><i class="icon-basket-loaded"></i> Add to cart</button>
+                            <button *ngIf="selectedLang==1" (click)="addToCart(product)" class="btn btn-fill-out btn-addtocart" type="button"><i class="icon-basket-loaded"></i> أضف الى العربة</button>
+                            
+                            <a class="add_wishlist" [class.w_active]="product.in_wish==1" (click)="wish_single()"><i class="icon-heart"></i></a>
+                        </div>
+                        <div class="cart_btn" *ngIf="product.out_of_stock==1">
+                                <button *ngIf="selectedLang!=1"  class="btn btn-fill-out btn-addtocart" type="button" disabled>Out of Stock</button>
+                                <button *ngIf="selectedLang==1" class="btn btn-fill-out btn-addtocart" type="button" disabled>إنتهى من المخزن
+                                </button>
+                                
+                                <a class="add_wishlist" [class.w_active]="product.in_wish==1" (click)="wish_single()"><i class="icon-heart"></i></a>
+                            </div>
+                    </div>
+                    <hr class="easy" />
+                    <ul class="product-meta">
+                        <li *ngIf="selectedLang!=1">SKU: <a href="javascript:;">{{product.sku}}</a></li>
+                        <li *ngIf="product.delivery!=0 && product.delivery!=null && selectedLang!=1">Delivery: <a href="javascript:;">{{product.delivery}}</a></li>
+                        <li *ngIf="product.delivery!=0 && product.delivery!=null && selectedLang==1">التسليم خلال: <a href="javascript:;">{{product.delivery}}</a></li>
+                        <li *ngIf="selectedLang==1">كود التخزين التعريفي: <a href="javascript:;">{{product.sku}}</a></li>
+                        <li *ngIf="selectedLang!=1">Category: <a href="javascript:;">{{product.cat.title}}</a></li>
+                        <li *ngIf="selectedLang==1">الفئة: <a href="javascript:;">{{product.cat.title}}</a></li>
+
+                        <!-- <li *ngIf="selectedLang!=1">Minimum Quantity is: <a href="javascript:;">{{product.min_order_qty}}</a></li>
+                        <li *ngIf="selectedLang==1">الحد الأدنى للكمية: <a href="javascript:;">{{product.min_order_qty}}</a></li> -->
+                        
+                        <li *ngIf="selectedLang!=1 && (product.packaging_box!=null)">Packaging Box: <a href="javascript:;">{{product.packaging_box}}</a></li>
+                        <li *ngIf="selectedLang==1">الكمية داخل الكرتون: <a href="javascript:;">{{product.packaging_box}}</a></li>
+
+                        <li *ngIf="selectedLang!=1">Description: <a href="javascript:;" [innerHTML]="sanitizer.bypassSecurityTrustHtml(product.description_sweb)"></a></li>
+                        <li *ngIf="selectedLang==1">الوصف: <a href="javascript:;" [innerHTML]="sanitizer.bypassSecurityTrustHtml(product.description_sweb)">{{product.sdescription}}</a></li>
+                        <!-- <li>Tags: <a href="javascript:;" rel="tag">Cloth</a>, <a href="#" rel="tag">printed</a> </li> -->
+                    </ul>
+                   
+                    
+                    <!-- <div class="product_share">
+                        <span>Share:</span>
+                        <ul class="social_icons">
+                            <li><a href="#"><i class="ion-social-facebook"></i></a></li>
+                            <li><a href="#"><i class="ion-social-twitter"></i></a></li>
+                            <li><a href="#"><i class="ion-social-googleplus"></i></a></li>
+                            <li><a href="#"><i class="ion-social-youtube-outline"></i></a></li>
+                            <li><a href="#"><i class="ion-social-instagram-outline"></i></a></li>
+                        </ul>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <div class="row">
+        	<div class="col-12">
+            	<div class="large_divider clearfix"></div>
+            </div>
+        </div>
+        <div class="row">
+        	<div class="col-12">
+            	<div class="tab-style3">
+					<ul class="nav nav-tabs" role="tablist">
+						<li class="nav-item">
+							<a *ngIf="selectedLang!=1" class="nav-link active" id="Description-tab" data-toggle="tab" href="#Description" role="tab" aria-controls="Description" aria-selected="true">Description</a>
+							<a *ngIf="selectedLang==1" class="nav-link active" id="Description-tab" data-toggle="tab" href="#Description" role="tab" aria-controls="Description" aria-selected="true">الوصف</a>
+                        </li>
+                        
+                      	<li *ngFor="let tab of product.more_descp; let tab_i = index;" class="nav-item">
+                        	<a class="nav-link" [attr.id]="'tab_'+tab_i+'-tab'" data-toggle="tab" [attr.href]="'#tab_'+tab_i" role="tab" [attr.aria-controls]="'tab_'+tab_i" aria-selected="false">{{tab.title}}</a>
+                      	</li>
+                      	<li class="nav-item">
+                        	<a *ngIf="selectedLang!=1" class="nav-link" id="Reviews-tab" data-toggle="tab" href="#Reviews" role="tab" aria-controls="Reviews" aria-selected="false">Reviews ({{product.reviews.length}})</a>
+                        	<a *ngIf="selectedLang==1" class="nav-link" id="Reviews-tab" data-toggle="tab" href="#Reviews" role="tab" aria-controls="Reviews" aria-selected="false">({{product.reviews.length}}) التقييمات</a>
+                      	</li>
+                    </ul>
+                	<div class="tab-content shop_info_tab">
+                      	<div class="tab-pane fade show active" id="Description" role="tabpanel" aria-labelledby="Description-tab" [innerHTML]="sanitizer.bypassSecurityTrustHtml(product.description_web)">
+                      	</div>
+                      	<div  *ngFor="let tab of product.more_descp; let tab_i = index;" class="tab-pane fade" [attr.id]="'tab_'+tab_i" role="tabpanel" [attr.aria-labelledby]="'tab_'+tab_i-tab">
+                        	{{tab.desc}}
+                      	</div>
+                      	<div class="tab-pane fade" id="Reviews" role="tabpanel" aria-labelledby="Reviews-tab">
+                        	<div class="comments">
+                            	<h5 *ngIf="selectedLang!=1" class="product_tab_title">{{product.reviews.length}} Reviews For <span>{{product.title}}</span></h5>
+                            	<h5 *ngIf="selectedLang==1" class="product_tab_title">{{product.reviews.length}} تقييم <span>{{product.title}}</span></h5>
+                                <ul class="list_none comment_list mt-4">
+                                    <li *ngFor="let rev of product.reviews; let ind = index;">
+                                        <div class="comment_img">
+                                            <img src="assets/images/user1.jpg" alt="user1"/>
+                                        </div>
+                                        <div class="comment_block">
+                                            <div class="rating_wrap">
+                                                <div class="rating">
+                                                    <div class="product_rate" [attr.style]="'width:'+((rev.rating/5)*100)+'%'"></div>
+                                                </div>
+                                            </div>
+                                            <p class="customer_meta">
+                                                <span class="review_author">{{rev.author_name}}</span>
+                                                <span class="comment-date">{{rev.at}}</span>
+                                            </p>
+                                            <div class="description">
+                                                <p>{{rev.review}}</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                   
+                                </ul>
+                        	</div>
+                            <div class="review_form field_form">
+                                <h5 *ngIf="selectedLang!=1">Add a review</h5>
+                                <h5 *ngIf="selectedLang==1">أضف تقييمك</h5>
+                                <form #reviewform="ngForm" (ngSubmit)="onSubmit(reviewform);" class="width100p flt_left">
+                                    <div class="form-group col-12 nopad">
+                                        <div class="star_rating">
+                                            <span *ngFor="let r of review_for; let ind=index;"  (click)="this.setStar(r)" ><i [class.fas]="r<=rating" [class.far]="r>rating || r==0" class=" fa-star"></i></span>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label *ngIf="selectedLang!=1">Review:
+                                          <sup>*</sup>
+                                        </label>
+                                        <label *ngIf="selectedLang==1">التقييم:
+                                            <sup>*</sup>
+                                          </label>
+                                        <textarea placeholder="{{selectedLang!=1?'Enter your review':'أدخل تقييمك '}}" 
+                                        minlength="5" 
+                                        autocomplete="off" 
+                                        cols="5"
+                                        
+                                        required 
+                                        class="form-control"
+                                          [(ngModel)]="review.revieww"  name="revieww" id="revieww" #revieww="ngModel"></textarea>
+                                        <small *ngIf="revieww.invalid && (revieww.dirty || revieww.touched)" class="b_alert b_alert_danger">
+                          
+                                          <div *ngIf="revieww.errors.required">
+                                            <span *ngIf="selectedLang!=1">Review is required.</span>
+                                            <span *ngIf="selectedLang==1">المراجعة مطلوبة.</span>
+                                          </div>
+                          
+                                          <div *ngIf="revieww.errors.minlength">
+                                            <span *ngIf="selectedLang!=1">Review must be at least 5 characters long.</span>
+                                            <span *ngIf="selectedLang==1">يجب أن تكون المراجعة 5 حرفًا على الأقل.</span>
+                                          </div>
+                                          
+                                        </small>
+                                      </div>
+                                    
+                                    <div *ngIf="selectedLang!=1" class="form-group col-12">
+                                        <button [disabled]="!reviewform.form.valid" [class.mousenotallowed]="!reviewform.form.valid" type="submit" class="btn btn-fill-out"
+                                        name="submit" id="submit">Submit Review</button>
+                                       
+                                    </div>
+
+                                    <div *ngIf="selectedLang==1" class="form-group col-12">
+                                        <button [disabled]="!reviewform.form.valid" [class.mousenotallowed]="!reviewform.form.valid" type="submit" class="btn btn-fill-out"
+                                        name="submit" id="submit">تقييم المنتج</button>
+                                       
+                                    </div>
+                                </form>
+                            </div>
+                      	</div>
+                	</div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row">
+        	<div class="col-12">
+            	<div class="small_divider"></div>
+            	<div class="divider"></div>
+                <div class="medium_divider"></div>
+            </div>
+        </div>
+        <div class="row">
+        	<div class="col-12">
+            	<div class="heading_s1">
+                	<h3 *ngIf="selectedLang!=1">Releted Products</h3>
+                	<h3 *ngIf="selectedLang==1">المنتجات المحذوفة</h3>
+                </div>
+            </div>
+        	<div class="col-12">
+            
+                        <div *ngFor="let prod of related; let prod_ind=index;" class="item col-3" style="float:left;">
+                            <div class="product_wrap">
+                                <div class="product_img">
+                                    <a routerLink="/product/{{prod.slug}}">
+                                        <img src="{{php_url+'resources/uploads/products/'+prod.image}}" alt="el_img1">
+                                        <img class="product_hover_img" src="{{php_url+'resources/uploads/products/'+prod.image}}" alt="el_img1">
+                                    </a>
+                                    
+                                </div>
+                                <div class="product_info  pb-0 minht110">
+                                    <h6 class="product_title"><a routerLink="/product/{{prod.slug}}">{{prod.title}}</a></h6>
+                                    <div *ngIf="prod.discount_text!=''" class="product_price">
+                                        <span class="price">{{prod.discounted_text}}</span>
+                                        <del>{{prod.real_price_text}}</del>
+                                        <div class="on_sale">
+                                            <span>{{prod.discount_text}}</span>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="prod.discount_text==''" class="product_price">
+                                        <span class="price">{{prod.real_price_text}}</span>
+                                        
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            
+                </div>
+            </div>
+        </div> -->
+    </div>
+</div>
+<!-- END SECTION SHOP -->
+
+
+</div>
+<div *ngIf="!dataLoaded" class="">
+    <span  *ngIf="selectedLang!=1">Loading...</span>
+    <span  *ngIf="selectedLang==1">جار التحميل...</span>
+</div>
