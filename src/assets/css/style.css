@@ -7299,6 +7299,10 @@ blockquote p:last-child {
 	background-color: #fff;
 	padding: 15px 0;
 }
+.product_title{
+    font-size: 1.5rem;
+}
+
 .product_title a{
 	/* font-size: 12px !important; */
 	/* font-weight: normal !important; */

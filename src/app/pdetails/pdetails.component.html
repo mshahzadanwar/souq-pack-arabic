@@ -40,8 +40,7 @@
             <div class="col-lg-6 col-md-6" [class.rtl]="selectedLang==1">
                 <div class="pr_detail">
                     <div class="product_description easy">
-                        <h4 class="product_title"><a href="javascript:;">{{product.title}}</a></h4>
-                        
+                        <h1 class="product_title product_title_size"><a href="javascript:;">{{product.title}}</a></h1>
                         <div *ngIf="product.discount_text!=''" class="product_price">
                             <span class="price">{{product.discounted_text}}</span>
                             <del *ngIf="product.real_price_text!=0">{{product.real_price_text}}</del>
